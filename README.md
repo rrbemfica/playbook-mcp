@@ -20,6 +20,12 @@ curl http://localhost:8080/health
 
 **Server available at:** `http://localhost:8080`
 
+## 🎥 Demo Video
+
+[![MCP Playbook Server Demo](https://img.shields.io/badge/▶️-Watch%20Demo-red?style=for-the-badge)](./mcp-playbook-demo.mp4)
+
+*Watch a quick demonstration of the MCP Playbook Server in action, showcasing epic creation, playbook usage.*
+
 ## ✨ Key Features
 
 - **🤖 AI-Powered Documentation**: Repository-aware content generation inspired by DeepWiki
