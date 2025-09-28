@@ -48,6 +48,7 @@ PLAYBOOKS = {
             "atlassian_integration": {
                 "instructions": [
                     "IMPORTANT: Use Atlassian official MCP tools to create or edit epics in Jira",
+                    "Always start by asking key questions to gather essential information:\n- What is the primary business goal of this epic?\n- Who are the target users/personas?\n- What are the expected outcomes and success metrics?\n- What are the known dependencies and risks?\n- What is the expected timeline and priority?\nOnly proceed with epic suggestions once sufficient context is gathered",
                     "Before executing any Atlassian commands, ALWAYS confirm with the user first",
                     "If user information is vague or incomplete, ask for clarification before proceeding",
                     "Required information: Project key, Epic title, Description, Priority (if not provided, ask user)",
@@ -96,6 +97,7 @@ PLAYBOOKS = {
             "atlassian_integration": {
                 "instructions": [
                     "IMPORTANT: Use Atlassian official MCP tools to create or edit user stories in Jira",
+                    "Always start by asking key questions to gather essential information to structure the story effectively:\n- Who is the target user/persona for this story?\n- What specific functionality does the user need?\n- What is the expected benefit or outcome for the user?\n- Are there any technical constraints or dependencies?\n- What is the priority and timeline for this story?\nOnly proceed with story suggestions once sufficient context is gathered",
                     "Before executing any Atlassian commands, ALWAYS confirm with the user first",
                     "If user information is vague or incomplete, ask for clarification before proceeding",
                     "Required information: Project key, Story title, User story description, Priority (if not provided, ask user)",
