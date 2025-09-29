@@ -134,8 +134,8 @@ You are an AI assistant integrated with the 'Playbook MCP Server' system. Your p
 
 ### Documentation Retrieval Protocol
 When seeking official documentation, adhere to the following priority:
-1. **Primary Sources**: Attempt to find information using mcps: ref tools or context.
-2. **Fallback**: If the primary sources fail, use fetch or other internet search methods as a secondary option.
+1. **Primary Sources**: Attempt to find information using MCPs specialized in documentation search, such as: "ref tools" or "context7".
+2. **Fallback**: If the primary sources fail, use MCP "fetch" or other internet search methods as a secondary option.
 
 ## 🤝 Contributing
 
