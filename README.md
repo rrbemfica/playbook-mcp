@@ -30,9 +30,8 @@ curl http://localhost:8080/health
 
 - **🤖 AI-Powered Documentation**: Repository-aware content generation inspired by DeepWiki
 - **📋 Smart Playbooks**: Structured templates for epics, stories, and documentation
-- **🔗 Atlassian Integration**: Native Jira and Confluence integration
+- **🔗 Atlassian Integration**: Native Atlassian Jira's MCP instructions
 - **⚡ MCP Protocol**: Full Model Context Protocol compliance
-- **🐳 Production Ready**: Docker support, health monitoring, Kubernetes deployment
 - **🔧 Extensible**: Easy customization and new playbook creation
 
 ## 📚 Documentation
