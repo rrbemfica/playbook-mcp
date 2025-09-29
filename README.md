@@ -47,7 +47,7 @@ curl http://localhost:8080/health
 
 ### By Role
 - **Developers**: [Quick Start](./docs/guides/quick-start.md) → [API Reference](./docs/guides/api-reference.md) → [Architecture](./docs/overview/architecture.md)
-- **Product Managers**: [Playbooks Guide](./docs/guides/playbooks.md) → [Atlassian Integration](./docs/advanced/integrations.md)
+- **Product Managers**: [Playbooks Guide](./docs/guides/playbooks.md) → Atlassian Integration (built into playbooks)
 - **DevOps**: [Deployment Guide](./docs/operations/deployment.md) → [Monitoring](./docs/operations/monitoring.md)
 
 ## 🛠️ Available Tools
@@ -67,14 +67,12 @@ curl http://localhost:8080/health
 - **Epic & Story Review**: Quality assurance checklists
 
 ### Documentation
-- **Deep Wiki Documentation**: Traditional comprehensive documentation
-- **Enhanced AI Documentation**: Repository-aware AI-powered content generation
-- **API Documentation**: Auto-generated API documentation
+- **Documentation Template**: Comprehensive documentation template
+- **Comprehensive Wiki Documentation**: Multi-layered documentation with contextual sections for deep knowledge capture
 
 ### Development
-- **Feature Planning**: Implementation roadmaps and technical planning
-- **Code Review**: Language-specific review checklists
-- **Quality Assurance**: Testing and validation templates
+- **Feature Planning**: Implementation roadmaps and technical planning (via `plan_feature` tool)
+- **Code Review**: Language-specific review checklists (via `code_review_checklist` tool)
 
 ## 🐳 Docker Deployment
 
@@ -82,9 +80,6 @@ curl http://localhost:8080/health
 # Quick Docker setup
 docker build -f docker/Dockerfile -t mcp-playbook-server .
 docker run -p 8080:8080 mcp-playbook-server
-
-# Or with Docker Compose
-docker-compose up -d
 ```
 
 ## ⚙️ Configuration
@@ -112,7 +107,7 @@ DEBUG=true
 - [x] Comprehensive playbook system
 - [x] AI-powered documentation generation
 - [x] Atlassian integration capabilities
-- [x] Docker containerization and Kubernetes support
+- [x] Docker containerization
 - [x] Complete documentation suite
 
 ### 🚧 Roadmap
@@ -121,6 +116,7 @@ DEBUG=true
 - [ ] Real-time collaboration features
 - [ ] IDE integration plugins
 - [ ] Multi-language template support
+- [ ] Docker Compose and Kubernetes support
 
 ## 🤖 Agent Instructions (Cursor, GitHub Copilot, Amazon Q Developer, etc.)
 
