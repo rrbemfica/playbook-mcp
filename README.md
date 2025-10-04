@@ -5,17 +5,22 @@ A Model Context Protocol (MCP) server that provides curated prompts, code templa
 ## 🚀 Quick Start
 
 ```bash
-# Clone and setup
+# Clone repository
 git clone <repository-url>
 cd mcp-playbook-server
-pip install -r requirements.txt
 
-# Configure and run
+# Create virtual environment
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install dependencies
+pip install .
+
+# Configure environment
 cp .env.example .env
-python -m src.server
 
-# Test
-curl http://localhost:8000/health
+# Run server
+python -m src.server
 ```
 
 **Server available at:** `http://localhost:8000`
@@ -77,10 +82,10 @@ curl http://localhost:8000/health
 ```bash
 # Build the image
 cd mcp-playbook-server
-docker build -f docker/Dockerfile -t mcp-playbook-server .
+docker build -f docker/Dockerfile -t mcp-playbook-server:2.0 -t mcp-playbook-server:latest .
 
 # Run the container
-docker run -p 8000:8000 mcp-playbook-server
+docker run --name mcp-playbook-server -p 8000:8000 mcp-playbook-server:latest
 
 # Run with environment variables
 docker run -p 8000:8000 \
