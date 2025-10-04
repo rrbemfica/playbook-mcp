@@ -220,7 +220,6 @@ PLAYBOOKS = {
         }
     },
     "code_review": {
-        # amazonq-ignore-next-line
         "name": "Code Review",
         "description": "Senior code reviewer ensuring high standards of code quality and security",
         "category": "Development",
@@ -254,7 +253,6 @@ PLAYBOOKS = {
             "code_issues_integration": {
                 "instructions": [
                     "IMPORTANT: Use displayFindings tool to populate the Code Issues panel with review findings",
-                    # amazonq-ignore-next-line
                     "Each finding must include: filePath (absolute), startLine, endLine, title, severity, description, language",
                     "Map priority to severity: Critical issues -> 'Critical', Warnings -> 'Medium', Suggestions -> 'Low'",
                     "Include specific line numbers where issues occur",
