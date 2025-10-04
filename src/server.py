@@ -321,7 +321,7 @@ def plan_feature(
     project_type: str = Field(default="web", description="Type of project (web, api, mobile, etc.)"),
     complexity: str = Field(default="medium", description="Complexity level (simple, medium, complex)")
 ) -> Dict[str, Any]:
-    """Generate a comprehensive feature implementation plan"""
+    """Generate a structured implementation plan with phases, tasks, and next actions for any feature. Returns a breakdown covering requirements, design, development, testing, and deployment."""
     return {
         "feature": feature_description,
         "project_type": project_type,
@@ -378,7 +378,7 @@ def plan_feature(
 
 @mcp.tool()
 def list_playbooks() -> Dict[str, Any]:
-    """List all available playbooks with their descriptions"""
+    """Retrieve all available playbooks with metadata. Returns playbook IDs, names, descriptions, and categories. Use this to discover which playbooks are available before retrieving specific ones."""
     playbook_list = []
     for key, playbook in PLAYBOOKS.items():
         playbook_list.append({
@@ -396,9 +396,9 @@ def list_playbooks() -> Dict[str, Any]:
 
 @mcp.tool()
 def get_playbook(
-    playbook_id: str = Field(description="ID of the playbook to retrieve")
+    playbook_id: str = Field(description="ID of the playbook to retrieve (e.g., 'product_owner_epic', 'comprehensive_wiki', 'code_review')")
 ) -> Dict[str, Any]:
-    """Get a specific playbook template by ID"""
+    """Retrieve complete playbook details including templates, instructions, and integration guidelines. Use this after identifying the needed playbook from list_playbooks. Returns structured content with sections, checklists, and usage instructions."""
     if playbook_id not in PLAYBOOKS:
         return {
             "error": f"Playbook '{playbook_id}' not found",
