@@ -177,7 +177,7 @@ docs/
 from mcp_client import MCPClient
 
 # Initialize client
-client = MCPClient("http://localhost:8080")
+client = MCPClient("http://localhost:8000")
 
 # List available playbooks
 playbooks = client.call_tool("list_playbooks", {})
@@ -435,7 +435,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Generate Documentation
       run: |
-        curl -X POST http://mcp-server:8080/tools/get_playbook \
+        curl -X POST http://mcp-server:8000/tools/get_playbook \
           -H "Content-Type: application/json" \
           -d '{"playbook_id": "enhanced_deep_wiki"}' \
           | jq '.template' > docs/template.json
@@ -494,13 +494,13 @@ class MCPPlaybookProvider:
 
 1. **Verify Playbook Availability**
 ```bash
-curl -X POST http://localhost:8080/tools/list_playbooks \
+curl -X POST http://localhost:8000/tools/list_playbooks \
   -H "Content-Type: application/json" -d '{}'
 ```
 
 2. **Check Template Structure**
 ```bash
-curl -X POST http://localhost:8080/tools/get_playbook \
+curl -X POST http://localhost:8000/tools/get_playbook \
   -H "Content-Type: application/json" \
   -d '{"playbook_id": "your_playbook_id"}'
 ```

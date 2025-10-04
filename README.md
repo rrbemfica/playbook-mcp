@@ -15,10 +15,10 @@ cp .env.example .env
 python -m src.server
 
 # Test
-curl http://localhost:8080/health
+curl http://localhost:8000/health
 ```
 
-**Server available at:** `http://localhost:8080`
+**Server available at:** `http://localhost:8000`
 
 ## 🎥 Demo Video
 
@@ -75,9 +75,27 @@ curl http://localhost:8080/health
 ## 🐳 Docker Deployment
 
 ```bash
-# Quick Docker setup
+# Build the image
+cd mcp-playbook-server
 docker build -f docker/Dockerfile -t mcp-playbook-server .
-docker run -p 8080:8080 mcp-playbook-server
+
+# Run the container
+docker run -p 8000:8000 mcp-playbook-server
+
+# Run with environment variables
+docker run -p 8000:8000 \
+  -e PORT=8000 \
+  -e ENVIRONMENT=production \
+  mcp-playbook-server
+
+# Run in detached mode
+docker run -d -p 8000:8000 --name playbook-server mcp-playbook-server
+
+# View logs
+docker logs playbook-server
+
+# Stop container
+docker stop playbook-server
 ```
 
 ## ⚙️ Configuration
@@ -88,7 +106,7 @@ cp .env.example .env
 
 # Key settings
 SERVER_NAME="Playbook MCP Server"
-PORT=8080
+PORT=8000
 ENVIRONMENT=development
 DEBUG=true
 ```

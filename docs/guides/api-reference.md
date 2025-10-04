@@ -4,7 +4,7 @@ Complete API documentation for the MCP Playbook Server.
 
 ## Base Information
 
-- **Base URL**: `http://localhost:8080`
+- **Base URL**: `http://localhost:8000`
 - **Protocol**: HTTP/HTTPS
 - **Format**: JSON
 - **Authentication**: None required
@@ -244,14 +244,14 @@ import requests
 
 # List playbooks
 response = requests.post(
-    "http://localhost:8080/tools/list_playbooks",
+    "http://localhost:8000/tools/list_playbooks",
     json={}
 )
 playbooks = response.json()
 
 # Generate feature plan
 response = requests.post(
-    "http://localhost:8080/tools/plan_feature",
+    "http://localhost:8000/tools/plan_feature",
     json={
         "feature_description": "User authentication",
         "project_type": "web",
@@ -264,7 +264,7 @@ plan = response.json()
 ### JavaScript Client
 ```javascript
 // List playbooks
-const response = await fetch('http://localhost:8080/tools/list_playbooks', {
+const response = await fetch('http://localhost:8000/tools/list_playbooks', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({})
@@ -272,7 +272,7 @@ const response = await fetch('http://localhost:8080/tools/list_playbooks', {
 const playbooks = await response.json();
 
 // Get playbook
-const playbookResponse = await fetch('http://localhost:8080/tools/get_playbook', {
+const playbookResponse = await fetch('http://localhost:8000/tools/get_playbook', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ playbook_id: 'enhanced_deep_wiki' })
@@ -283,15 +283,15 @@ const playbook = await playbookResponse.json();
 ### cURL Examples
 ```bash
 # Health check
-curl http://localhost:8080/health
+curl http://localhost:8000/health
 
 # List playbooks
-curl -X POST http://localhost:8080/tools/list_playbooks \
+curl -X POST http://localhost:8000/tools/list_playbooks \
   -H "Content-Type: application/json" \
   -d '{}'
 
 # Generate feature plan
-curl -X POST http://localhost:8080/tools/plan_feature \
+curl -X POST http://localhost:8000/tools/plan_feature \
   -H "Content-Type: application/json" \
   -d '{"feature_description": "User authentication", "project_type": "web"}' 
 ```

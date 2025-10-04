@@ -41,7 +41,7 @@ python -m src.server
 ```bash
 # .env for development
 SERVER_NAME="MCP Playbook Server - Dev"
-PORT=8080
+PORT=8000
 ENVIRONMENT=development
 DEBUG=true
 LOG_LEVEL=DEBUG
@@ -77,7 +77,7 @@ mypy src/
 docker build -f docker/Dockerfile -t mcp-playbook-server .
 
 # Run container
-docker run -p 8080:8080 \
+docker run -p 8000:8000 \
   -e ENVIRONMENT=production \
   -e DEBUG=false \
   --name mcp-server \
@@ -96,14 +96,14 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     ports:
-      - "8080:8080"
+      - "8000:8000"
     environment:
       - ENVIRONMENT=production
       - DEBUG=false
       - SERVER_NAME=MCP Playbook Server
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -192,9 +192,9 @@ USER mcp
 # Update PATH
 ENV PATH=/home/mcp/.local/bin:$PATH
 
-EXPOSE 8080
+EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:8080/health || exit 1
+  CMD curl -f http://localhost:8000/health || exit 1
 
 CMD ["python", "-m", "src.server"]
 ```
@@ -222,7 +222,7 @@ data:
   SERVER_NAME: "MCP Playbook Server - Production"
   ENVIRONMENT: "production"
   DEBUG: "false"
-  PORT: "8080"
+  PORT: "8000"
   LOG_LEVEL: "INFO"
 ---
 # k8s/secret.yaml
@@ -265,7 +265,7 @@ spec:
       - name: mcp-server
         image: mcp-playbook-server:2.0
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
           name: http
         envFrom:
         - configMapRef:
@@ -282,7 +282,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /health
-            port: 8080
+            port: 8000
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
@@ -290,7 +290,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /health
-            port: 8080
+            port: 8000
           initialDelaySeconds: 5
           periodSeconds: 5
           timeoutSeconds: 3
@@ -327,7 +327,7 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8080
+    targetPort: 8000
     name: http
   type: ClusterIP
 ---
@@ -447,14 +447,14 @@ kubectl rollout undo deployment/mcp-playbook-server -n mcp-playbook
       "image": "ACCOUNT.dkr.ecr.REGION.amazonaws.com/mcp-playbook-server:latest",
       "portMappings": [
         {
-          "containerPort": 8080,
+          "containerPort": 8000,
           "protocol": "tcp"
         }
       ],
       "environment": [
         {"name": "ENVIRONMENT", "value": "production"},
         {"name": "DEBUG", "value": "false"},
-        {"name": "PORT", "value": "8080"}
+        {"name": "PORT", "value": "8000"}
       ],
       "secrets": [
         {
@@ -471,7 +471,7 @@ kubectl rollout undo deployment/mcp-playbook-server -n mcp-playbook
         }
       },
       "healthCheck": {
-        "command": ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"],
+        "command": ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"],
         "interval": 30,
         "timeout": 5,
         "retries": 3,
@@ -502,7 +502,7 @@ kubectl rollout undo deployment/mcp-playbook-server -n mcp-playbook
     {
       "targetGroupArn": "arn:aws:elasticloadbalancing:REGION:ACCOUNT:targetgroup/mcp-tg/1234567890123456",
       "containerName": "mcp-server",
-      "containerPort": 8080
+      "containerPort": 8000
     }
   ],
   "serviceRegistries": [
@@ -537,12 +537,12 @@ spec:
       containers:
       - image: gcr.io/PROJECT-ID/mcp-playbook-server:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
         env:
         - name: ENVIRONMENT
           value: production
         - name: PORT
-          value: "8080"
+          value: "8000"
         - name: DEBUG
           value: "false"
         resources:
@@ -552,13 +552,13 @@ spec:
         livenessProbe:
           httpGet:
             path: /health
-            port: 8080
+            port: 8000
           initialDelaySeconds: 30
           periodSeconds: 10
         startupProbe:
           httpGet:
             path: /health
-            port: 8080
+            port: 8000
           initialDelaySeconds: 10
           periodSeconds: 5
           failureThreshold: 10
@@ -592,7 +592,7 @@ properties:
     properties:
       image: youracr.azurecr.io/mcp-playbook-server:latest
       ports:
-      - port: 8080
+      - port: 8000
         protocol: TCP
       environmentVariables:
       - name: ENVIRONMENT
@@ -600,7 +600,7 @@ properties:
       - name: DEBUG
         value: "false"
       - name: PORT
-        value: "8080"
+        value: "8000"
       resources:
         requests:
           cpu: 1
@@ -608,7 +608,7 @@ properties:
       livenessProbe:
         httpGet:
           path: /health
-          port: 8080
+          port: 8000
         initialDelaySeconds: 30
         periodSeconds: 10
   osType: Linux
@@ -617,7 +617,7 @@ properties:
     type: Public
     ports:
     - protocol: TCP
-      port: 8080
+      port: 8000
   imageRegistryCredentials:
   - server: youracr.azurecr.io
     username: <username>
@@ -827,7 +827,7 @@ deploy-production:
 ```bash
 # Production .env
 SERVER_NAME="MCP Playbook Server - Production"
-PORT=8080
+PORT=8000
 ENVIRONMENT=production
 DEBUG=false
 LOG_LEVEL=INFO
@@ -876,7 +876,7 @@ spec:
           name: ingress-nginx
     ports:
     - protocol: TCP
-      port: 8080
+      port: 8000
 ```
 
 3. **Secrets Management**
@@ -947,7 +947,7 @@ kubectl describe pod <pod-name>
 2. **Health Check Failures**
 ```bash
 # Test health endpoint
-curl -f http://localhost:8080/health
+curl -f http://localhost:8000/health
 
 # Check container health
 docker inspect <container-id> | grep Health

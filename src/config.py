@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     """Configuration settings for Playbook MCP Server"""
     
     server_name: str = "Playbook MCP Server"
-    port: int = 8080
+    port: int = 8000
     environment: str = "development"
     
     class Config:

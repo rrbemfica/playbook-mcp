@@ -56,7 +56,7 @@ cp .env.example .env
 python -m src.server
 
 # Test
-curl http://localhost:8080/health
+curl http://localhost:8000/health
 ```
 
 ## Core Concepts

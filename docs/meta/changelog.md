@@ -246,11 +246,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 1. **Update Configuration**
 ```bash
 # Old format
-SERVER_PORT=8080
+SERVER_PORT=8000
 DEBUG_MODE=true
 
 # New format
-PORT=8080
+PORT=8000
 DEBUG=true
 ENVIRONMENT=production
 ```
@@ -290,7 +290,7 @@ docker build -f docker/Dockerfile -t mcp-playbook-server:1.1 .
 2. **Update Health Checks**
 ```bash
 # New health check endpoint
-curl http://localhost:8080/health
+curl http://localhost:8000/health
 ```
 
 ## Contributors

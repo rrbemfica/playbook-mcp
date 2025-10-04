@@ -40,13 +40,13 @@ cp .env.example .env
 python -m src.server
 ```
 
-Server starts at `http://localhost:8080`
+Server starts at `http://localhost:8000`
 
 ## Verify Installation
 
 ### Health Check
 ```bash
-curl http://localhost:8080/health
+curl http://localhost:8000/health
 ```
 
 Expected response:
@@ -59,7 +59,7 @@ Expected response:
 
 ### List Available Tools
 ```bash
-curl -X POST http://localhost:8080/tools/list_playbooks \
+curl -X POST http://localhost:8000/tools/list_playbooks \
   -H "Content-Type: application/json" \
   -d '{}'
 ```
@@ -69,17 +69,17 @@ curl -X POST http://localhost:8080/tools/list_playbooks \
 ### 1. Explore Playbooks
 ```bash
 # List all playbooks
-curl -X POST http://localhost:8080/tools/list_playbooks -H "Content-Type: application/json" -d '{}'
+curl -X POST http://localhost:8000/tools/list_playbooks -H "Content-Type: application/json" -d '{}'
 
 # Get specific playbook
-curl -X POST http://localhost:8080/tools/get_playbook \
+curl -X POST http://localhost:8000/tools/get_playbook \
   -H "Content-Type: application/json" \
   -d '{"playbook_id": "comprehensive_wiki"}'
 ```
 
 ### 2. Generate Feature Plan
 ```bash
-curl -X POST http://localhost:8080/tools/plan_feature \
+curl -X POST http://localhost:8000/tools/plan_feature \
   -H "Content-Type: application/json" \
   -d '{
     "feature_description": "User authentication system",
@@ -98,7 +98,7 @@ curl -X POST http://localhost:8080/tools/plan_feature \
 docker build -f docker/Dockerfile -t mcp-playbook-server .
 
 # Run container
-docker run -p 8080:8080 mcp-playbook-server
+docker run -p 8000:8000 mcp-playbook-server
 ```
 
 ### Docker Compose
@@ -113,7 +113,7 @@ docker-compose up -d
 ```bash
 # .env file
 SERVER_NAME="MCP Playbook Server"
-PORT=8080
+PORT=8000
 ENVIRONMENT=development
 DEBUG=true
 ```
@@ -122,7 +122,7 @@ DEBUG=true
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `SERVER_NAME` | "MCP Playbook Server" | Server identification |
-| `PORT` | 8080 | HTTP server port |
+| `PORT` | 8000 | HTTP server port |
 | `ENVIRONMENT` | "development" | Runtime environment |
 | `DEBUG` | false | Debug mode toggle |
 
@@ -130,8 +130,8 @@ DEBUG=true
 
 ### Port Already in Use
 ```bash
-# Check what's using port 8080
-lsof -i :8080
+# Check what's using port 8000
+lsof -i :8000
 
 # Kill process or change port in .env
 PORT=8081

@@ -260,7 +260,7 @@ Default Values (Lowest Priority)
 class Settings(BaseSettings):
     # Server Configuration
     server_name: str = "MCP Playbook Server"
-    port: int = 8080
+    port: int = 8000
     environment: str = "development"
     debug: bool = False
     
