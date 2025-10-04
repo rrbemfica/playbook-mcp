@@ -219,6 +219,51 @@ PLAYBOOKS = {
             }
         }
     },
+    "code_review": {
+        # amazonq-ignore-next-line
+        "name": "Code Review",
+        "description": "Senior code reviewer ensuring high standards of code quality and security",
+        "category": "Development",
+        "template": {
+            "instructions": [
+                "You are a senior code reviewer ensuring high standards of code quality and security.",
+                "When invoked:",
+                "1. Run git diff to see recent changes",
+                "2. Focus on modified files",
+                "3. Begin review immediately"
+            ],
+            "checklist": [
+                "Code is simple and readable",
+                "Functions and variables are well-named",
+                "No duplicated code",
+                "Proper error handling",
+                "No exposed secrets or API keys",
+                "Input validation implemented",
+                "Good test coverage",
+                "Performance considerations addressed"
+            ],
+            "feedback_structure": {
+                "critical": "Critical issues (must fix)",
+                "warnings": "Warnings (should fix)",
+                "suggestions": "Suggestions (consider improving)"
+            },
+            "guidelines": [
+                "Provide feedback organized by priority",
+                "Include specific examples of how to fix issues"
+            ],
+            "code_issues_integration": {
+                "instructions": [
+                    "IMPORTANT: Use displayFindings tool to populate the Code Issues panel with review findings",
+                    # amazonq-ignore-next-line
+                    "Each finding must include: filePath (absolute), startLine, endLine, title, severity, description, language",
+                    "Map priority to severity: Critical issues -> 'Critical', Warnings -> 'Medium', Suggestions -> 'Low'",
+                    "Include specific line numbers where issues occur",
+                    "Optionally provide suggestedFixes array with code examples",
+                    "Run displayFindings once with all findings after completing the review"
+                ]
+            }
+        }
+    },
     "epic_story_review": {
         "name": "Epic & Story Review Checklist",
         "description": "Comprehensive review template for epic and story summaries and descriptions",

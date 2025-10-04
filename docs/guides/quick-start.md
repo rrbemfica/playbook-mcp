@@ -74,7 +74,7 @@ curl -X POST http://localhost:8080/tools/list_playbooks -H "Content-Type: applic
 # Get specific playbook
 curl -X POST http://localhost:8080/tools/get_playbook \
   -H "Content-Type: application/json" \
-  -d '{"playbook_id": "enhanced_deep_wiki"}'
+  -d '{"playbook_id": "comprehensive_wiki"}'
 ```
 
 ### 2. Generate Feature Plan

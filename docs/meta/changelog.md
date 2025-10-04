@@ -30,10 +30,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Enhanced input validation and sanitization
 
+## [2.0.1] - 2024-01-XX
+
+### Documentation Updates
+- Updated all documentation to reflect current playbook names and IDs
+- Fixed references from `enhanced_deep_wiki` to `comprehensive_wiki`
+- Added complete documentation for `epic_story_review` playbook
+- Updated API reference with correct playbook examples and response formats
+- Improved playbooks guide with accurate template structures and usage examples
+- Added folder structure documentation for comprehensive wiki playbook
+- Updated code review integration documentation with displayFindings tool usage
+- Corrected playbook counts (6 total playbooks) throughout documentation
+- Standardized playbook categories and descriptions
+
+### Changed
+- Standardized playbook naming conventions across all documentation files
+- Updated usage examples to match current server implementation
+- Improved clarity in playbook descriptions and usage instructions
+- Enhanced quick start guide with correct playbook IDs
+- Updated roadmap to reflect current development priorities
+
+### Fixed
+- Inconsistent playbook references between code and documentation
+- Missing documentation for epic_story_review playbook
+- Incorrect API response examples in documentation
+- Outdated playbook IDs in code examples
+
 ## [2.0.0] - 2024-01-15
 
 ### Added
-- **Enhanced Deep Wiki Documentation**: AI-powered comprehensive documentation with repository analysis
+- **Comprehensive Wiki Documentation**: Multi-layered documentation with 12 contextual sections
 - **Atlassian Integration**: Native Jira and Confluence integration capabilities
 - **Epic & Story Review Checklist**: Comprehensive review template for product management
 - **AI Content Generation**: Repository-aware content generation inspired by DeepWiki
@@ -45,7 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Security Hardening**: Container security, input validation, and secure defaults
 
 ### Changed
-- **Playbook Structure**: Enhanced template structure with AI-powered sections
+- **Playbook Structure**: Enhanced template structure with comprehensive sections
 - **API Response Format**: Improved response structure with metadata and validation
 - **Error Handling**: Comprehensive error handling with detailed error codes
 - **Configuration System**: Migrated to Pydantic-based configuration management
@@ -148,9 +174,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [x] Health check endpoints
 - [x] Configuration management
 - [x] Docker containerization
-- [x] MCP Prompts implementation
-- [x] AI-powered documentation generation
-- [x] Atlassian integration capabilities
+- [x] Comprehensive playbook system (6 playbooks)
+- [x] Product management playbooks with Atlassian integration
+- [x] Documentation templates including comprehensive wiki
+- [x] Code review and feature planning tools
 - [x] Comprehensive documentation suite
 - [x] Production deployment guides
 

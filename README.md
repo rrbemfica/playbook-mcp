@@ -63,15 +63,15 @@ curl http://localhost:8080/health
 ### Product Management
 - **Epic Writing**: Comprehensive epic templates with Atlassian integration
 - **User Story Writing**: Structured story templates with acceptance criteria
-- **Epic & Story Review**: Quality assurance checklists
+- **Epic & Story Review**: Quality assurance checklists for reviewing epics and stories
 
 ### Documentation
-- **Documentation Template**: Comprehensive documentation template
-- **Comprehensive Wiki Documentation**: Multi-layered documentation with contextual sections for deep knowledge capture
+- **Documentation Template**: Standard documentation template for general use
+- **Comprehensive Wiki Documentation**: Multi-layered documentation with 12 contextual sections for deep knowledge capture
 
 ### Development
 - **Feature Planning**: Implementation roadmaps and technical planning (via `plan_feature` tool)
-- **Code Review**: Language-specific review checklists (via `code_review_checklist` tool)
+- **Code Review**: Senior code reviewer with quality and security standards (via `code_review_checklist` tool)
 
 ## 🐳 Docker Deployment
 

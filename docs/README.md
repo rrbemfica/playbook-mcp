@@ -29,16 +29,17 @@ The Playbook MCP Server is an AI-powered Model Context Protocol (MCP) server tha
 - [x] Health check endpoints  
 - [x] Configuration management
 - [x] Docker containerization
-- [x] MCP Prompts implementation
-- [x] AI-powered documentation generation
-- [x] Atlassian integration capabilities
+- [x] Comprehensive playbook system (6 playbooks)
+- [x] Product management playbooks with Atlassian integration
+- [x] Documentation templates including comprehensive wiki
+- [x] Code review and feature planning tools
 
 ### Roadmap
-- [ ] Advanced prompt templates
-- [ ] Code template engine
-- [ ] Advanced search and filtering
-- [ ] IDE integration
-- [ ] Multi-language support
+- [ ] AI-powered documentation generation
+- [ ] Dynamic playbook loading from external repositories
+- [ ] Template inheritance and composition
+- [ ] Multi-language support for templates
+- [ ] Community playbook marketplace
 
 ## Quick Start
 

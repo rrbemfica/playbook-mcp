@@ -82,11 +82,11 @@ Template for writing effective user stories with proper acceptance criteria.
 
 ### Documentation
 
-#### Deep Wiki Documentation
-**ID**: `deep_wiki_documentation`  
+#### Documentation Template
+**ID**: `documentation`  
 **Category**: Documentation
 
-Traditional comprehensive wiki-style documentation template.
+Standard comprehensive documentation template for general use.
 
 **Template Structure:**
 1. **Overview**: Purpose, audience, prerequisites
@@ -111,62 +111,63 @@ Traditional comprehensive wiki-style documentation template.
 - Maintain a comprehensive changelog
 - Link to related documentation
 
-#### Enhanced Deep Wiki Documentation (AI-Powered)
-**ID**: `enhanced_deep_wiki`  
+#### Comprehensive Wiki Documentation
+**ID**: `comprehensive_wiki`  
 **Category**: Documentation
 
-AI-powered comprehensive documentation with repository analysis and automated content generation.
+Multi-layered documentation template with 12 contextual sections for deep knowledge capture.
 
-**AI-Powered Sections:**
+**Template Structure:**
 
-1. **Auto-Generated Overview**
-   - Purpose analysis from codebase structure
-   - Target audience identification from README and docs
-   - Prerequisites extraction from requirements and setup files
+1. **Executive Summary**: What, why, and key outcomes
+2. **Context & Background**: Problem statement, current state, stakeholders
+3. **Architecture Overview**: System design, components, data flow
+4. **Implementation Guide**: Prerequisites, setup, configuration, verification
+5. **Usage Patterns**: Common use cases with examples
+6. **API Reference**: Endpoints, parameters, responses
+7. **Advanced Topics**: Performance, security, scaling strategies
+8. **Troubleshooting & Diagnostics**: Common issues, debugging tools, emergency procedures
+9. **Integration & Dependencies**: External systems, upstream/downstream dependencies
+10. **Operations & Maintenance**: Deployment, monitoring, backup & recovery
+11. **Knowledge Base**: Decision log, lessons learned, related documentation
+12. **Appendices**: Glossary, change history, contact information
 
-2. **Intelligent Quick Start**
-   - Setup steps derived from configuration files
-   - Essential commands extracted from scripts and Makefiles
-   - Basic examples generated from code patterns
-
-3. **Context-Aware Detailed Guide**
-   - Core concepts identified from architecture patterns
-   - System design documentation from code structure
-   - Configuration tables auto-generated from environment files
-
-4. **Advanced Integration Patterns**
-   - Performance optimization tips from code analysis
-   - Integration patterns identified from dependencies
-   - Best practices derived from code quality metrics
-
-5. **Intelligent Troubleshooting**
-   - Common issues extracted from error handling code
-   - Debugging steps generated from logging patterns
-   - FAQ compiled from issue tracking and support patterns
-
-6. **Smart References**
-   - Related documentation links from project structure
-   - External dependencies analysis and documentation
-   - Automated changelog generation from commit history
-
-**DeepWiki Inspiration:**
-- **Source**: Cognition Labs DeepWiki MCP Server
-- **Key Concepts**: AI-powered context gathering, repository-aware documentation
-- **Enhancements**: Structured template framework, hybrid manual/AI approach
+**Folder Structure:**
+```
+docs/
+├── README.md (Executive Summary)
+├── overview/
+│   ├── context.md
+│   └── architecture.md
+├── guides/
+│   ├── implementation.md
+│   ├── usage-patterns.md
+│   └── api-reference.md
+├── advanced/
+│   ├── performance.md
+│   └── troubleshooting.md
+├── operations/
+│   ├── integrations.md
+│   └── maintenance.md
+└── meta/
+    ├── knowledge-base.md
+    └── appendices.md
+```
 
 **Usage Workflow:**
-1. **Repository Analysis**: Analyze target repository structure and patterns
-2. **Content Generation**: Generate AI-powered content for each section
-3. **Template Population**: Populate template with generated content
-4. **Quality Assurance**: Review and refine generated documentation
-5. **Publication**: Deploy documentation with update mechanisms
+1. Create the recommended folder structure in your project
+2. Start with README.md (Executive Summary) as your main entry point
+3. Create separate markdown files for each section in appropriate folders
+4. Use relative links to connect documents
+5. Fill in the placeholders with your specific content
+6. Customize sections as needed for your use case
 
-**AI Features:**
-- Repository structure analysis
-- Code pattern recognition
-- Dependency mapping and documentation
-- Automated content generation
-- Dynamic updates based on code changes
+**Best Practices:**
+- Use README.md as the main entry point
+- Organize sections into logical folders by audience and purpose
+- Link between documents using relative paths
+- Keep file names lowercase with hyphens (kebab-case.md)
+- Maintain consistency across all documentation files
 
 ## Playbook Usage Patterns
 
@@ -195,21 +196,19 @@ sections = template["sections"]
 ### Advanced Integration
 
 ```python
-# Analyze documentation approach
-analysis = client.call_tool("analyze_documentation_approach", {
-    "current_approach": "manual",
-    "target_project_type": "web",
-    "repository_url": "https://github.com/user/repo"
-})
-
-# Get recommendation
-recommended_playbook = analysis["recommended_playbook"]
-effort_reduction = analysis["effort_reduction"]
-
-# Use recommended playbook
+# Get comprehensive wiki playbook
 playbook = client.call_tool("get_playbook", {
-    "playbook_id": recommended_playbook
+    "playbook_id": "comprehensive_wiki"
 })
+
+# Access folder structure recommendations
+folder_structure = playbook["folder_structure"]
+print(f"Recommended layout: {folder_structure['recommended_layout']}")
+
+# Get usage instructions
+instructions = playbook["usage_instructions"]
+for instruction in instructions:
+    print(f"- {instruction}")
 ```
 
 ### Atlassian Integration
@@ -306,56 +305,47 @@ PLAYBOOKS["api_documentation"] = custom_playbook
 PLAYBOOK_PROCESSORS["api_documentation"] = process_api_playbook
 ```
 
-### AI Enhancement Integration
+### Epic & Story Review
 
-For AI-powered playbooks:
+#### Epic & Story Review Checklist
+**ID**: `epic_story_review`  
+**Category**: Product Management
 
-1. **Repository Analysis**
+Comprehensive review template for epic and story summaries and descriptions.
+
+**Template Structure:**
+- **Summary Quality Check**: Epic and story summary validation
+- **Description Completeness**: Business objectives, acceptance criteria, technical details
+- **Clarity & Communication**: Language, tone, stakeholder alignment
+- **Acceptance Criteria Review**: Epic-level and story-level criteria validation
+- **Technical Considerations**: Implementation readiness, dependencies, integration
+- **Review Recommendations**: Improvement areas with priority levels
+
+**Atlassian Integration Features:**
+- Use getJiraIssue tool to retrieve current epic/story details
+- Use editJiraIssue tool to update based on review recommendations
+- Add review comments using addCommentToJiraIssue tool
+- Always validate project access before accessing issues
+
+**Usage Example:**
 ```python
-def analyze_repository(repo_path):
-    """Analyze repository structure and patterns."""
-    analysis = {
-        "structure": analyze_directory_structure(repo_path),
-        "dependencies": extract_dependencies(repo_path),
-        "patterns": identify_code_patterns(repo_path),
-        "documentation": find_existing_docs(repo_path)
-    }
-    return analysis
-```
+# Get review playbook
+playbook = client.call_tool("get_playbook", {
+    "playbook_id": "epic_story_review"
+})
 
-2. **Content Generation**
-```python
-def generate_ai_content(template, analysis):
-    """Generate content using AI based on repository analysis."""
-    content = {}
-    
-    for section in template["sections"]:
-        section_name = section["name"]
-        
-        # Generate content based on section type and analysis
-        if section_name == "Overview":
-            content[section_name] = generate_overview(analysis)
-        elif section_name == "Quick Start":
-            content[section_name] = generate_quick_start(analysis)
-        # ... more section types
-    
-    return content
-```
+# Retrieve Jira issue for review
+issue = get_jira_issue(cloud_id, issue_key)
 
-3. **Quality Assurance**
-```python
-def validate_generated_content(content, analysis):
-    """Validate AI-generated content for accuracy and completeness."""
-    validation_results = {}
-    
-    for section, text in content.items():
-        validation_results[section] = {
-            "accuracy": check_factual_accuracy(text, analysis),
-            "completeness": check_completeness(text, section),
-            "clarity": check_readability(text)
-        }
-    
-    return validation_results
+# Apply review checklist
+review_results = apply_review_checklist(playbook["template"], issue)
+
+# Add review comments to Jira
+add_comment_to_jira_issue(
+    cloud_id=cloud_id,
+    issue_key=issue_key,
+    comment_body=format_review_results(review_results)
+)
 ```
 
 ## Best Practices
@@ -382,27 +372,28 @@ def validate_generated_content(content, analysis):
    - Use modular, reusable components
    - Document customization points
 
-### AI Integration
+### Code Review Integration
 
-1. **Human Oversight**
-   - Always include review steps for AI-generated content
-   - Provide manual override options
-   - Implement quality gates
+1. **Code Issues Panel**
+   - Use displayFindings tool to populate the Code Issues panel
+   - Each finding must include: filePath, startLine, endLine, title, severity, description, language
+   - Map priority to severity: Critical → 'Critical', Warnings → 'Medium', Suggestions → 'Low'
 
-2. **Quality Gates**
-   - Validate AI-generated content for accuracy
-   - Check for completeness and relevance
-   - Ensure consistency with project standards
+2. **Review Process**
+   - Run git diff to see recent changes
+   - Focus on modified files
+   - Provide feedback organized by priority
+   - Include specific examples of how to fix issues
 
-3. **Fallback Options**
-   - Provide manual alternatives when AI fails
-   - Include traditional templates as backup
-   - Graceful degradation for partial failures
-
-4. **Transparency**
-   - Clearly mark AI-generated content
-   - Document the AI generation process
-   - Provide confidence scores where applicable
+3. **Quality Checklist**
+   - Code is simple and readable
+   - Functions and variables are well-named
+   - No duplicated code
+   - Proper error handling
+   - No exposed secrets or API keys
+   - Input validation implemented
+   - Good test coverage
+   - Performance considerations addressed
 
 ### Template Management
 

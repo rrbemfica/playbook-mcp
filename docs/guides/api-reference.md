@@ -62,10 +62,16 @@ List all available playbooks.
       "category": "Product Management"
     },
     {
-      "id": "enhanced_deep_wiki",
-      "name": "Enhanced Deep Wiki Documentation",
-      "description": "AI-powered comprehensive documentation",
+      "id": "comprehensive_wiki",
+      "name": "Comprehensive Wiki Documentation",
+      "description": "Multi-layered documentation with contextual sections",
       "category": "Documentation"
+    },
+    {
+      "id": "epic_story_review",
+      "name": "Epic & Story Review Checklist",
+      "description": "Comprehensive review template for epic and story summaries",
+      "category": "Product Management"
     }
   ],
   "categories": ["Product Management", "Documentation"]
@@ -81,7 +87,7 @@ Retrieve a specific playbook template.
 **Request:**
 ```json
 {
-  "playbook_id": "enhanced_deep_wiki"
+  "playbook_id": "comprehensive_wiki"
 }
 ```
 
@@ -91,22 +97,26 @@ Retrieve a specific playbook template.
 **Response:**
 ```json
 {
-  "id": "enhanced_deep_wiki",
-  "name": "Enhanced Deep Wiki Documentation",
-  "description": "AI-powered comprehensive documentation",
+  "id": "comprehensive_wiki",
+  "name": "Comprehensive Wiki Documentation",
+  "description": "Multi-layered documentation with contextual sections",
   "category": "Documentation",
   "template": {
-    "title": "[Project Name] - Deep Dive Documentation",
+    "title": "[Project/Topic Name] - Comprehensive Wiki",
     "sections": [
       {
         "name": "Executive Summary",
-        "content": "## Purpose\n[AI-generated purpose from repository analysis]"
+        "content": "## What is this?\n[One-sentence description]"
       }
     ]
   },
-  "usage_workflow": [
-    "1. Repository Analysis: Analyze target repository structure",
-    "2. Content Generation: Generate AI-powered content"
+  "folder_structure": {
+    "recommended_layout": "docs/\n├── README.md (Executive Summary)\n├── overview/...",
+    "instructions": ["Create a 'docs' folder in your project root"]
+  },
+  "usage_instructions": [
+    "Create the recommended folder structure in your project",
+    "Start with README.md (Executive Summary) as your main entry point"
   ]
 }
 ```
