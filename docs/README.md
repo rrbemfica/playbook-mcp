@@ -20,7 +20,7 @@ The Playbook MCP Server is an AI-powered Model Context Protocol (MCP) server tha
 
 ## Project Status
 
-**Current Version**: 2.0  
+**Current Version**: 2.1  
 **Development Phase**: Phase 1 Complete (Epic N8N-7)  
 **Production Ready**: ✅ Yes
 
@@ -40,24 +40,6 @@ The Playbook MCP Server is an AI-powered Model Context Protocol (MCP) server tha
 - [ ] Template inheritance and composition
 - [ ] Multi-language support for templates
 - [ ] Community playbook marketplace
-
-## Quick Start
-
-```bash
-# Clone and setup
-git clone <repository-url>
-cd mcp-playbook-server
-pip install -r requirements.txt
-
-# Configure
-cp .env.example .env
-
-# Run
-python -m src.server
-
-# Test
-curl http://localhost:8000/health
-```
 
 ## Core Concepts
 

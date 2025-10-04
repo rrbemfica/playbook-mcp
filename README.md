@@ -82,7 +82,7 @@ python -m src.server
 ```bash
 # Build the image
 cd mcp-playbook-server
-docker build -f docker/Dockerfile -t mcp-playbook-server:2.0 -t mcp-playbook-server:latest .
+docker build -f docker/Dockerfile -t mcp-playbook-server:2.1 -t mcp-playbook-server:latest .
 
 # Run the container
 docker run --name mcp-playbook-server -p 8000:8000 mcp-playbook-server:latest
@@ -103,6 +103,27 @@ docker logs playbook-server
 docker stop playbook-server
 ```
 
+### Accessing Localhost MCPs from Docker
+
+If your server needs to connect to MCPs running on localhost:
+
+**Option 1: Host Network Mode (Linux)**
+```bash
+docker run --network host mcp-playbook-server
+```
+
+**Option 2: Use host.docker.internal (Mac/Windows)**
+```bash
+# In your code, replace localhost with host.docker.internal
+# Example: http://host.docker.internal:8000/mcp
+docker run -p 8000:8000 mcp-playbook-server
+```
+
+**Option 3: Add extra host (All platforms)**
+```bash
+docker run -p 8000:8000 --add-host=host.docker.internal:host-gateway mcp-playbook-server
+```
+
 ## ⚙️ Configuration
 
 ```bash
@@ -118,7 +139,7 @@ DEBUG=true
 
 ## 🏗️ Project Status
 
-**Current Version**: 2.0  
+**Current Version**: 2.1  
 **Development Phase**: Phase 1 Complete
 **Production Ready**: ✅ Yes
 

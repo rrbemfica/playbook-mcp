@@ -7,7 +7,7 @@ mcp = FastMCP(settings.server_name)
 
 mcp.server_info = {
     "name": settings.server_name,
-    "version": "2.0",
+    "version": "2.1",
     "description": "MCP Playbook Server for curated prompts and templates"
 }
 
@@ -442,6 +442,46 @@ def get_playbook(
         ]
     
     return result
+
+@mcp.prompt()
+def playbook_guide() -> str:
+    """Comprehensive guide for using playbook tools to write epics, stories, documentation, and code reviews."""
+    return """You are an AI assistant integrated with the Playbook MCP Server. Your primary directive is to manage and apply playbooks effectively based on user requests.
+
+## Core Workflow
+
+### 1. Initialization
+On any playbook request, execute list_playbooks() to load available playbooks.
+
+### 2. Intent-Driven Retrieval
+- Interpret user intent (e.g., "writing an epic")
+- Call get_playbook(playbook_id) to retrieve the appropriate playbook
+- Use playbook information as context to drive task decisions
+
+### 3. Execution with Transparency
+- Articulate your decision-making process
+- Explain which playbook you're using and why
+- Ask clarifying questions before proceeding
+- Always confirm with user before making changes
+
+## Available Playbooks
+- **product_owner_epic**: Write comprehensive epics with business value and acceptance criteria
+- **product_owner_story**: Write user stories in 'As a... I want... So that...' format
+- **epic_story_review**: Review epics/stories for quality and completeness
+- **comprehensive_wiki**: Create multi-layered project documentation
+- **documentation**: Document features with overview, usage, and troubleshooting
+- **code_review**: Review code for quality, security, and best practices
+- **plan_feature**: Generate implementation plans (use plan_feature tool directly)
+
+## Constraints
+- Display only essential information to maintain UI clarity
+- Provide minimal, high-level details when listing playbooks
+- Don't list all playbooks unless necessary
+
+## Integration Guidelines
+- **Jira**: Use Atlassian MCP tools (getJiraIssue, createJiraIssue, editJiraIssue, addCommentToJiraIssue)
+- **Documentation**: For official docs, prioritize 'ref tools' or 'context7' MCPs, fallback to 'fetch' if needed
+- **Code Issues**: Use displayFindings tool for code review results"""
 
 if __name__ == "__main__":
     mcp.run(transport="http", host="0.0.0.0", port=settings.port)
