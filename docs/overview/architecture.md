@@ -107,15 +107,7 @@ TOOLS = {
         },
         "category": "Planning"
     },
-    "code_review_checklist": {
-        "function": code_review_checklist,
-        "description": "Create code review checklists",
-        "parameters": {
-            "language": str,
-            "review_type": str
-        },
-        "category": "Quality"
-    }
+
 }
 ```
 

@@ -31,7 +31,7 @@ Server information and capabilities.
   "name": "MCP Playbook Server",
   "version": "2.0",
   "description": "Enhanced MCP Playbook Server with AI documentation",
-  "tools": ["list_playbooks", "get_playbook", "plan_feature", "code_review_checklist"]
+  "tools": ["list_playbooks", "get_playbook", "plan_feature"]
 }
 ```
 
@@ -182,73 +182,6 @@ Generate a comprehensive feature implementation plan.
 }
 ```
 
-### code_review_checklist
-
-Generate a code review checklist for specific language and review type.
-
-**Endpoint:** `POST /tools/code_review_checklist`
-
-**Request:**
-```json
-{
-  "language": "python",
-  "review_type": "security"
-}
-```
-
-**Parameters:**
-- `language` (required): Programming language (python, javascript, java, etc.)
-- `review_type` (optional): Type of review (standard, security, performance) - default: "standard"
-
-**Response:**
-```json
-{
-  "language": "python",
-  "review_type": "security",
-  "categories": [
-    {
-      "name": "General Code Quality",
-      "items": [
-        "Code follows PEP 8 style guidelines",
-        "Functions are well-named and focused",
-        "Proper error handling implemented",
-        "Code is properly documented"
-      ]
-    },
-    {
-      "name": "Security",
-      "items": [
-        "Input validation implemented",
-        "SQL injection prevention",
-        "Authentication/authorization checks",
-        "Sensitive data handling",
-        "Dependency security audit"
-      ]
-    },
-    {
-      "name": "Python-Specific",
-      "items": [
-        "Proper use of virtual environments",
-        "Requirements.txt is up to date",
-        "No hardcoded secrets or credentials",
-        "Proper exception handling"
-      ]
-    }
-  ],
-  "approval_criteria": [
-    "All security items addressed",
-    "No critical issues remaining",
-    "Code coverage above 80%",
-    "All tests passing"
-  ],
-  "additional_notes": [
-    "Use tools like bandit for security scanning",
-    "Consider using pre-commit hooks",
-    "Review dependencies for known vulnerabilities"
-  ]
-}
-```
-
 ## Error Handling
 
 ### Error Response Format
@@ -357,10 +290,10 @@ curl -X POST http://localhost:8080/tools/list_playbooks \
   -H "Content-Type: application/json" \
   -d '{}'
 
-# Generate code review checklist
-curl -X POST http://localhost:8080/tools/code_review_checklist \
+# Generate feature plan
+curl -X POST http://localhost:8080/tools/plan_feature \
   -H "Content-Type: application/json" \
-  -d '{"language": "javascript", "review_type": "performance"}'
+  -d '{"feature_description": "User authentication", "project_type": "web"}' 
 ```
 
 ## OpenAPI Specification

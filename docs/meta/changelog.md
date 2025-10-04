@@ -135,7 +135,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `list_playbooks`: List all available playbooks
   - `get_playbook`: Retrieve specific playbook templates
   - `plan_feature`: Generate feature implementation plans
-  - `code_review_checklist`: Create code review checklists
+
 - **FastMCP Integration**: Built on FastMCP framework for MCP protocol compliance
 - **Basic Configuration**: Environment-based configuration system
 - **Template Engine**: Structured template system for consistent output

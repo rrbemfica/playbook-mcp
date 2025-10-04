@@ -88,15 +88,7 @@ curl -X POST http://localhost:8080/tools/plan_feature \
   }'
 ```
 
-### 3. Create Code Review Checklist
-```bash
-curl -X POST http://localhost:8080/tools/code_review_checklist \
-  -H "Content-Type: application/json" \
-  -d '{
-    "language": "python",
-    "review_type": "security"
-  }'
-```
+
 
 ## Docker Quick Start
 

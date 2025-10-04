@@ -32,7 +32,7 @@ The Playbook MCP Server is an AI-powered Model Context Protocol (MCP) server tha
 - [x] Comprehensive playbook system (6 playbooks)
 - [x] Product management playbooks with Atlassian integration
 - [x] Documentation templates including comprehensive wiki
-- [x] Code review and feature planning tools
+- [x] Feature planning tools
 
 ### Roadmap
 - [ ] AI-powered documentation generation
@@ -89,7 +89,6 @@ Inspired by Cognition Labs' DeepWiki:
 | `list_playbooks` | List all available playbooks | Core |
 | `get_playbook` | Retrieve specific playbook template | Core |
 | `plan_feature` | Generate feature implementation plans | Planning |
-| `code_review_checklist` | Create code review checklists | Quality |
 
 ## Support & Community
 

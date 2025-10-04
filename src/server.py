@@ -379,63 +379,6 @@ def plan_feature(
     }
 
 @mcp.tool()
-def code_review_checklist(
-    language: str = Field(description="Programming language"),
-    review_type: str = Field(default="standard", description="Type of review (standard, security, performance)")
-) -> Dict[str, Any]:
-    """Generate a code review checklist for the specified language and type"""
-    checklist = {
-        "language": language,
-        "review_type": review_type,
-        "categories": [
-            {
-                "name": "General Code Quality",
-                "items": [
-                    "Code follows project style guidelines",
-                    "Functions are well-named and focused",
-                    "Comments explain why, not what",
-                    "No dead or commented-out code"
-                ]
-            },
-            {
-                "name": f"{language.title()} Specific",
-                "items": [
-                    "Proper error handling",
-                    "Resource management (memory, connections)",
-                    "Type safety (if applicable)",
-                    "Performance considerations"
-                ]
-            },
-            {
-                "name": "Testing",
-                "items": [
-                    "Unit tests cover new functionality",
-                    "Edge cases are tested",
-                    "Tests are maintainable"
-                ]
-            }
-        ],
-        "approval_criteria": [
-            "All checklist items addressed",
-            "No critical issues remaining",
-            "Documentation updated"
-        ]
-    }
-    
-    if review_type == "security":
-        checklist["categories"].insert(-1, {
-            "name": "Security",
-            "items": [
-                "Input validation",
-                "Authentication/authorization",
-                "Data sanitization",
-                "Secure communication"
-            ]
-        })
-    
-    return checklist
-
-@mcp.tool()
 def list_playbooks() -> Dict[str, Any]:
     """List all available playbooks with their descriptions"""
     playbook_list = []

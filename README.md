@@ -56,7 +56,6 @@ curl http://localhost:8080/health
 | `list_playbooks` | List all available playbooks | Get overview of templates |
 | `get_playbook` | Retrieve specific playbook | Access epic writing template |
 | `plan_feature` | Generate implementation plans | Plan authentication system |
-| `code_review_checklist` | Create review checklists | Python security review |
 
 ## 🎯 Core Playbooks
 
@@ -71,7 +70,7 @@ curl http://localhost:8080/health
 
 ### Development
 - **Feature Planning**: Implementation roadmaps and technical planning (via `plan_feature` tool)
-- **Code Review**: Senior code reviewer with quality and security standards (via `code_review_checklist` tool)
+- **Code Review**: Senior code reviewer with quality and security standards
 
 ## 🐳 Docker Deployment
 
