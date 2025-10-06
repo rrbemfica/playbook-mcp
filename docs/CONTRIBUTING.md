@@ -37,7 +37,7 @@ This project adheres to a code of conduct that we expect all contributors to fol
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.11 or higher
 - Git
 - Docker (optional, for containerized development)
 - Basic understanding of MCP (Model Context Protocol)
@@ -69,8 +69,8 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
+pip install .
+pip install .[dev]
 
 # Copy environment configuration
 cp .env.example .env
@@ -388,7 +388,7 @@ cd mcp-playbook-server
 # 2. Set up Python environment
 python -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt -r requirements-dev.txt
+pip install .[dev]
 
 # 3. Set up pre-commit hooks
 pre-commit install

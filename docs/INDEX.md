@@ -12,26 +12,15 @@ Complete documentation index for the MCP Playbook Server.
 ### 📖 User Guides
 - [**API Reference**](./guides/api-reference.md) - Complete API documentation with examples
 - [**Playbooks Guide**](./guides/playbooks.md) - Available templates, usage patterns, and customization
-- [**Configuration Guide**](./guides/configuration.md) - Environment setup and configuration options
 
 ### 🏗️ System Overview
 - [**Architecture Overview**](./overview/architecture.md) - System design, components, and data flow
-- [**Security Architecture**](./overview/security.md) - Security layers, authentication, and best practices
 
 ### 🚀 Operations
 - [**Deployment Guide**](./operations/deployment.md) - Local, Docker, Kubernetes, and cloud deployments
-- [**Monitoring Guide**](./operations/monitoring.md) - Health checks, metrics, and observability
-- [**Troubleshooting Guide**](./operations/troubleshooting.md) - Common issues and debugging
-
-### 🔧 Advanced Topics
-- [**Performance Optimization**](./advanced/performance.md) - Scaling, caching, and optimization strategies
-- [**Integration Patterns**](./advanced/integrations.md) - External service integrations and patterns
-- [**AI Enhancement Guide**](./advanced/ai-integration.md) - AI-powered features and customization
 
 ### 📋 Reference
 - [**Changelog**](./meta/changelog.md) - Version history and release notes
-- [**Glossary**](./meta/glossary.md) - Terms and definitions
-- [**FAQ**](./meta/faq.md) - Frequently asked questions
 
 ## 🎯 Quick Navigation by Role
 
@@ -44,18 +33,14 @@ Complete documentation index for the MCP Playbook Server.
 ### For Product Managers
 1. [Playbooks Guide](./guides/playbooks.md) - Available templates and usage
 2. [Epic & Story Templates](./guides/playbooks.md#product-management) - Product management playbooks
-3. [Atlassian Integration](./advanced/integrations.md#atlassian) - Jira and Confluence integration
 
 ### For DevOps Engineers
 1. [Deployment Guide](./operations/deployment.md) - Production deployment options
-2. [Monitoring Guide](./operations/monitoring.md) - Observability and health checks
-3. [Performance Optimization](./advanced/performance.md) - Scaling strategies
-4. [Troubleshooting Guide](./operations/troubleshooting.md) - Issue resolution
+2. [Architecture Overview](./overview/architecture.md) - System design and scaling
 
 ### For Technical Writers
-1. [AI Documentation Features](./guides/playbooks.md#enhanced-deep-wiki-documentation-ai-powered) - AI-powered documentation
-2. [Documentation Templates](./guides/playbooks.md#documentation) - Available documentation playbooks
-3. [Content Generation](./advanced/ai-integration.md) - AI content generation capabilities
+1. [Documentation Templates](./guides/playbooks.md#documentation) - Available documentation playbooks
+2. [Playbooks Guide](./guides/playbooks.md) - Template usage and customization
 
 ## 📊 Documentation Metrics
 
@@ -138,7 +123,6 @@ Complete documentation index for the MCP Playbook Server.
 - **Getting Started**: [Quick Start Guide](./guides/quick-start.md)
 - **API Usage**: [API Reference](./guides/api-reference.md)
 - **Deployment**: [Deployment Guide](./operations/deployment.md)
-- **Troubleshooting**: [Troubleshooting Guide](./operations/troubleshooting.md)
 - **Contributing**: [Contributing Guide](./CONTRIBUTING.md)
 
 ## 📞 Support and Feedback

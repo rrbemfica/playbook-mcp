@@ -185,7 +185,7 @@ print(f"Available playbooks: {len(playbooks['playbooks'])}")
 
 # Get specific playbook
 playbook = client.call_tool("get_playbook", {
-    "playbook_id": "enhanced_deep_wiki"
+    "playbook_id": "comprehensive_wiki"
 })
 
 # Use playbook template
@@ -437,7 +437,7 @@ jobs:
       run: |
         curl -X POST http://mcp-server:8000/tools/get_playbook \
           -H "Content-Type: application/json" \
-          -d '{"playbook_id": "enhanced_deep_wiki"}' \
+          -d '{"playbook_id": "comprehensive_wiki"}' \
           | jq '.template' > docs/template.json
         
         # Process template with repository data

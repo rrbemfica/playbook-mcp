@@ -317,7 +317,7 @@ Playbook Request → Registry Lookup → Template Retrieval → Content Generati
    Response ← Formatting ← Validation ← Processing ← AI Enhancement
 ```
 
-**AI-Enhanced Processing Flow** (for enhanced_deep_wiki):
+**AI-Enhanced Processing Flow** (for comprehensive_wiki):
 ```
 Repository Analysis → Pattern Recognition → Content Generation → Template Population
         ↓                     ↓                    ↓                   ↓

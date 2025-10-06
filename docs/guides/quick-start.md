@@ -4,7 +4,7 @@ Get the MCP Playbook Server running in 5 minutes.
 
 ## Prerequisites
 
-- Python 3.8+
+- Python 3.11+
 - pip package manager
 - Git
 
@@ -23,7 +23,7 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip install .
 ```
 
 ### 3. Configure
@@ -140,7 +140,7 @@ PORT=8081
 ### Import Errors
 ```bash
 # Reinstall dependencies
-pip install -r requirements.txt --force-reinstall
+pip install . --force-reinstall
 ```
 
 ### Permission Issues

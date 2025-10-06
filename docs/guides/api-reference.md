@@ -29,7 +29,7 @@ Server information and capabilities.
 ```json
 {
   "name": "MCP Playbook Server",
-  "version": "2.0",
+  "version": "2.1",
   "description": "Enhanced MCP Playbook Server with AI documentation",
   "tools": ["list_playbooks", "get_playbook", "plan_feature"]
 }
@@ -53,7 +53,7 @@ List all available playbooks.
 **Response:**
 ```json
 {
-  "total_playbooks": 4,
+  "total_playbooks": 6,
   "playbooks": [
     {
       "id": "product_owner_epic",
@@ -275,7 +275,7 @@ const playbooks = await response.json();
 const playbookResponse = await fetch('http://localhost:8000/tools/get_playbook', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ playbook_id: 'enhanced_deep_wiki' })
+  body: JSON.stringify({ playbook_id: 'comprehensive_wiki' })
 });
 const playbook = await playbookResponse.json();
 ```

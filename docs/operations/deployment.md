@@ -9,7 +9,7 @@ This guide covers deployment options from local development to production enviro
 ## Local Development
 
 ### Prerequisites
-- Python 3.8+
+- Python 3.11+
 - pip package manager
 - Git
 - Optional: Docker for containerized development
@@ -26,7 +26,7 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip install .
 
 # Configure environment
 cp .env.example .env
@@ -51,7 +51,7 @@ LOG_LEVEL=DEBUG
 
 ```bash
 # Install development dependencies
-pip install -r requirements-dev.txt
+pip install .[dev]
 
 # Run with hot reload
 python -m src.server --reload
@@ -167,8 +167,8 @@ docker-compose up -d
 FROM python:3.11-slim as builder
 
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir --user -r requirements.txt
+COPY pyproject.toml .
+RUN pip install --no-cache-dir --user .
 
 FROM python:3.11-slim as runtime
 
@@ -244,7 +244,7 @@ metadata:
   namespace: mcp-playbook
   labels:
     app: mcp-playbook-server
-    version: v2.0
+    version: v2.1
 spec:
   replicas: 3
   strategy:
@@ -259,11 +259,11 @@ spec:
     metadata:
       labels:
         app: mcp-playbook-server
-        version: v2.0
+        version: v2.1
     spec:
       containers:
       - name: mcp-server
-        image: mcp-playbook-server:2.0
+        image: mcp-playbook-server:2.1
         ports:
         - containerPort: 8000
           name: http
@@ -661,12 +661,11 @@ jobs:
       uses: actions/cache@v3
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/pyproject.toml') }}
         
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
-        pip install -r requirements-dev.txt
+        pip install .[dev]
         
     - name: Lint code
       run: |
@@ -767,7 +766,7 @@ test:
   services:
     - docker:dind
   script:
-    - pip install -r requirements.txt -r requirements-dev.txt
+    - pip install .[dev]
     - flake8 src/ tests/
     - black --check src/ tests/
     - mypy src/
