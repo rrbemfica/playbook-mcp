@@ -5,6 +5,19 @@ All notable changes to the MCP Playbook Server project are documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.2] - 2025-10-07
+
+### Playbook Improvements
+- **Consistency**: Aligned critical_instructions between documentation and comprehensive_wiki playbooks
+- **Simplified**: Reduced comprehensive_wiki critical_instructions from 10 to 7 concise directives
+- **Enhanced**: Added explicit file references in documentation playbook sections (requirements.txt, pyproject.toml, tests)
+- **Standardized**: Both documentation playbooks now share identical critical_instructions enforcing code-first approach
+
+### Changed
+- Simplified comprehensive_wiki critical_instructions for better clarity
+- Enhanced documentation playbook section guidance with specific file type references
+- Improved consistency in troubleshooting guidance wording across both playbooks
+
 ## [2.1.1] - 2025-10-07
 
 ### Documentation Overhaul
@@ -127,7 +140,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Release Date | Key Features | Status |
 |---------|--------------|--------------|--------|
-| 2.1.1 | 2025-10-07 | Documentation sanitization, removed fictional features | ✅ Current |
+| 2.1.2 | 2025-10-07 | Playbook consistency improvements | ✅ Current |
+| 2.1.1 | 2025-10-07 | Documentation sanitization, removed fictional features | ✅ Stable |
 | 2.1.0 | 2025-10-06 | Documentation fixes, improved clarity | ✅ Stable |
 | 2.0.0 | 2025-10-04 | Playbook templates, Atlassian integration | ✅ Stable |
 | 1.1.0 | 2025-09-29 | Documentation updates | ✅ Stable |

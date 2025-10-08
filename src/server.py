@@ -7,7 +7,7 @@ mcp = FastMCP(settings.server_name)
 
 mcp.server_info = {
     "name": settings.server_name,
-    "version": "2.1.1",
+    "version": "2.1.2",
     "description": "MCP Playbook Server for curated prompts and templates"
 }
 

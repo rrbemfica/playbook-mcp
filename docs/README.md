@@ -20,7 +20,7 @@ The Playbook MCP Server is an AI-powered Model Context Protocol (MCP) server tha
 
 ## Project Status
 
-**Current Version**: 2.1.1  
+**Current Version**: 2.1.2  
 **Development Phase**: Phase 1 Complete
 **Production Ready**: ✅ Yes
 
