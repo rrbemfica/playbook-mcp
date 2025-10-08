@@ -135,19 +135,19 @@ PLAYBOOKS = {
             "sections": [
                 {
                     "name": "Overview",
-                    "content": "## Purpose\n[What this component/feature actually does - based on code analysis]\n\n## Audience\n[Who should read this - based on actual use cases]\n\n## Prerequisites\n[Actual requirements found in code/config files]"
+                    "content": "## Purpose\n[What this component/feature actually does - based on code analysis]\n\n## Audience\n[Who should read this - based on actual use cases]\n\n## Prerequisites\n[Actual requirements from requirements.txt, pyproject.toml, or package.json]"
                 },
                 {
                     "name": "Quick Start",
-                    "content": "### Getting Started\n\n[List actual setup steps from README or installation scripts]\n\n### Basic Example\n```\n[Real code example from the codebase]\n```"
+                    "content": "### Getting Started\n\n[List actual setup steps from README or installation scripts]\n\n### Basic Example\n```\n[Real code example from the codebase or tests]\n```"
                 },
                 {
                     "name": "Detailed Guide",
-                    "content": "### Core Concepts\n[Document actual concepts implemented in the code]\n\n### Configuration\n[Document actual configuration options from config files]\n| Option | Description | Default |\n|--------|-------------|---------|\n| [actual_param] | [from code] | [actual default] |"
+                    "content": "### Core Concepts\n[Document actual concepts implemented in the code]\n\n### Configuration\n[Document actual config files and their real options]\n| Option | Description | Default |\n|--------|-------------|---------|\n| [actual_param] | [from code] | [actual default] |"
                 },
                 {
                     "name": "Troubleshooting",
-                    "content": "### Common Issues\n\n[Document only known issues from code comments, error handling, or issue tracker]\n\n**Issue: [Actual problem]**\n- Cause: [Based on code analysis]\n- Solution: [Actual fix]"
+                    "content": "### Common Issues\n\n[Document only known issues from code, error handling, or issue tracker]\n\n**Issue: [Actual problem]**\n- Cause: [From code analysis]\n- Solution: [Actual solution]"
                 }
             ]
         }
@@ -159,16 +159,13 @@ PLAYBOOKS = {
         "template": {
             "title": "[Project/Topic Name] - Comprehensive Wiki",
             "critical_instructions": [
-                "CRITICAL: This playbook requires THOROUGH code analysis before writing",
-                "MANDATORY: Read all relevant source files to understand what actually exists",
-                "FORBIDDEN: Do NOT document features, APIs, or components that are not implemented",
-                "REQUIRED: Use actual file paths, class names, function signatures from the codebase",
-                "REQUIRED: Verify every technical detail against the actual code",
-                "If a section template mentions something not in the code, write 'Not Implemented' or skip it",
-                "Document the CURRENT state, not planned features or ideal architecture",
-                "When documenting architecture, describe only what exists in the file structure",
-                "For API documentation, only document endpoints/functions that actually exist",
-                "Use code search, file reading, and directory listing tools to verify everything"
+                "CRITICAL: Document ONLY what exists in the codebase",
+                "Read and analyze actual code files before writing documentation",
+                "Do NOT invent features, components, or capabilities that are not implemented",
+                "Use exact file names, function names, and class names from the code",
+                "If a section doesn't apply because the feature doesn't exist, skip it or mark as 'Not Implemented'",
+                "Verify all code examples by checking they exist in the actual codebase",
+                "When in doubt, read the code first, then document what you see"
             ],
             "sections": [
                 {
