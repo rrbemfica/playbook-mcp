@@ -87,63 +87,32 @@ docker run -p 8000:8000 \
 ### Docker Compose
 
 ```yaml
-# docker-compose.yml
+# docker/docker-compose.yml
 version: '3.8'
 
 services:
   mcp-server:
     build:
-      context: .
+      context: ..
       dockerfile: docker/Dockerfile
     ports:
       - "8000:8000"
     environment:
-      - ENVIRONMENT=production
-      - DEBUG=false
       - SERVER_NAME=MCP Playbook Server
+      - PORT=8000
+      - ENVIRONMENT=production
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000')"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
-    volumes:
-      - ./logs:/app/logs
-    networks:
-      - mcp-network
-
-  # Optional: Add monitoring
-  prometheus:
-    image: prom/prometheus:latest
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-    networks:
-      - mcp-network
-
-  grafana:
-    image: grafana/grafana:latest
-    ports:
-      - "3000:3000"
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-    volumes:
-      - grafana-storage:/var/lib/grafana
-    networks:
-      - mcp-network
-
-networks:
-  mcp-network:
-    driver: bridge
-
-volumes:
-  grafana-storage:
+      start_period: 10s
 ```
 
 ```bash
 # Deploy with compose
+cd docker
 docker-compose up -d
 
 # Check status
@@ -152,12 +121,8 @@ docker-compose ps
 # View logs
 docker-compose logs -f mcp-server
 
-# Scale service
-docker-compose up -d --scale mcp-server=3
-
-# Update service
-docker-compose pull
-docker-compose up -d
+# Stop service
+docker-compose down
 ```
 
 ### Multi-stage Dockerfile

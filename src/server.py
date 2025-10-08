@@ -7,7 +7,7 @@ mcp = FastMCP(settings.server_name)
 
 mcp.server_info = {
     "name": settings.server_name,
-    "version": "2.1",
+    "version": "2.1.1",
     "description": "MCP Playbook Server for curated prompts and templates"
 }
 
@@ -123,22 +123,31 @@ PLAYBOOKS = {
         "category": "Documentation",
         "template": {
             "title": "[Topic Name] - Documentation",
+            "critical_instructions": [
+                "CRITICAL: Document ONLY what exists in the codebase",
+                "Read and analyze actual code files before writing documentation",
+                "Do NOT invent features, components, or capabilities that are not implemented",
+                "Use exact file names, function names, and class names from the code",
+                "If a section doesn't apply because the feature doesn't exist, skip it or mark as 'Not Implemented'",
+                "Verify all code examples by checking they exist in the actual codebase",
+                "When in doubt, read the code first, then document what you see"
+            ],
             "sections": [
                 {
                     "name": "Overview",
-                    "content": "## Purpose\nBrief explanation of what this document covers\n\n## Audience\nWho should read this documentation\n\n## Prerequisites\nWhat knowledge/setup is required"
+                    "content": "## Purpose\n[What this component/feature actually does - based on code analysis]\n\n## Audience\n[Who should read this - based on actual use cases]\n\n## Prerequisites\n[Actual requirements found in code/config files]"
                 },
                 {
                     "name": "Quick Start",
-                    "content": "### Getting Started\n\n1. Step 1\n2. Step 2\n3. Step 3\n\n### Basic Example\n```\n[code example]\n```"
+                    "content": "### Getting Started\n\n[List actual setup steps from README or installation scripts]\n\n### Basic Example\n```\n[Real code example from the codebase]\n```"
                 },
                 {
                     "name": "Detailed Guide",
-                    "content": "### Core Concepts\n- Concept 1: Explanation\n- Concept 2: Explanation\n\n### Configuration\n| Option | Description | Default |\n|--------|-------------|---------|\n| param1 | Description | value1  |"
+                    "content": "### Core Concepts\n[Document actual concepts implemented in the code]\n\n### Configuration\n[Document actual configuration options from config files]\n| Option | Description | Default |\n|--------|-------------|---------|\n| [actual_param] | [from code] | [actual default] |"
                 },
                 {
                     "name": "Troubleshooting",
-                    "content": "### Common Issues\n\n**Issue 1: Problem description**\n- Cause: Why it happens\n- Solution: How to fix"
+                    "content": "### Common Issues\n\n[Document only known issues from code comments, error handling, or issue tracker]\n\n**Issue: [Actual problem]**\n- Cause: [Based on code analysis]\n- Solution: [Actual fix]"
                 }
             ]
         }
@@ -149,54 +158,66 @@ PLAYBOOKS = {
         "category": "Documentation",
         "template": {
             "title": "[Project/Topic Name] - Comprehensive Wiki",
+            "critical_instructions": [
+                "CRITICAL: This playbook requires THOROUGH code analysis before writing",
+                "MANDATORY: Read all relevant source files to understand what actually exists",
+                "FORBIDDEN: Do NOT document features, APIs, or components that are not implemented",
+                "REQUIRED: Use actual file paths, class names, function signatures from the codebase",
+                "REQUIRED: Verify every technical detail against the actual code",
+                "If a section template mentions something not in the code, write 'Not Implemented' or skip it",
+                "Document the CURRENT state, not planned features or ideal architecture",
+                "When documenting architecture, describe only what exists in the file structure",
+                "For API documentation, only document endpoints/functions that actually exist",
+                "Use code search, file reading, and directory listing tools to verify everything"
+            ],
             "sections": [
                 {
                     "name": "Executive Summary",
-                    "content": "## What is this?\n[One-sentence description]\n\n## Why does it matter?\n[Business/technical value]\n\n## Key outcomes\n- Outcome 1\n- Outcome 2\n- Outcome 3"
+                    "content": "## What is this?\n[One-sentence description based on actual project purpose]\n\n## Why does it matter?\n[Actual business/technical value - from README or project docs]\n\n## Key outcomes\n[List only implemented features/capabilities]"
                 },
                 {
                     "name": "Context & Background",
-                    "content": "## Problem Statement\n[What problem does this solve?]\n\n## Current State\n[How things work today]\n\n## Stakeholders\n- **Primary**: [Who owns this?]\n- **Secondary**: [Who is affected?]\n- **External**: [Who needs to know?]"
+                    "content": "## Problem Statement\n[Actual problem from project documentation or code comments]\n\n## Current State\n[Describe actual implementation based on code analysis]\n\n## Stakeholders\n[Only list if documented in project files]"
                 },
                 {
                     "name": "Architecture Overview",
-                    "content": "## System Design\n[High-level architecture]\n\n## Components\n| Component | Purpose | Dependencies |\n|-----------|---------|--------------|\n| [Name] | [Function] | [What it needs] |\n\n## Data Flow\n1. [Step 1]\n2. [Step 2]\n3. [Step 3]"
+                    "content": "## System Design\n[Describe actual architecture from code structure]\n\n## Components\n[List only components that exist in the codebase]\n| Component | Purpose | Dependencies |\n|-----------|---------|--------------|\n| [Actual file/module] | [What it does] | [Actual dependencies from imports] |\n\n## Data Flow\n[Trace actual data flow through the code]"
                 },
                 {
                     "name": "Implementation Guide",
-                    "content": "## Prerequisites\n- [Requirement 1]\n- [Requirement 2]\n\n## Setup Instructions\n```bash\n# Installation\n[commands]\n```\n\n## Configuration\n```yaml\n# config.yml\n[configuration example]\n```\n\n## Verification\n```bash\n# Test commands\n[verification steps]\n```"
+                    "content": "## Prerequisites\n[Actual requirements from requirements.txt, pyproject.toml, or package.json]\n\n## Setup Instructions\n```bash\n[Actual installation commands from README or setup scripts]\n```\n\n## Configuration\n[Document actual config files and their real options]\n```\n[Real configuration example from .env.example or config files]\n```\n\n## Verification\n```bash\n[Actual test/verification commands that exist]\n```"
                 },
                 {
                     "name": "Usage Patterns",
-                    "content": "## Common Use Cases\n\n### Use Case 1: [Scenario]\n**When**: [Conditions]\n**How**: [Steps]\n**Example**:\n```\n[code/config example]\n```\n\n### Use Case 2: [Scenario]\n**When**: [Conditions]\n**How**: [Steps]\n**Example**:\n```\n[code/config example]\n```"
+                    "content": "## Common Use Cases\n\n[Document only use cases supported by actual code]\n\n### [Actual Use Case from code/tests]\n**When**: [Real conditions]\n**How**: [Actual steps]\n**Example**:\n```\n[Real code example from the codebase or tests]\n```"
                 },
                 {
                     "name": "API Reference",
-                    "content": "## Endpoints\n\n### GET /api/[resource]\n**Purpose**: [What it does]\n**Parameters**:\n- `param1` (string): [Description]\n- `param2` (int): [Description]\n\n**Response**:\n```json\n{\n  \"example\": \"response\"\n}\n```\n\n### POST /api/[resource]\n**Purpose**: [What it does]\n**Body**:\n```json\n{\n  \"field1\": \"value\",\n  \"field2\": 123\n}\n```"
+                    "content": "## API/Functions\n\n[ONLY document APIs/functions that exist in the code]\n[Read the actual source files to get function signatures]\n\n### [Actual function/endpoint name]\n**Purpose**: [What it actually does - from code]\n**Parameters**: [Real parameters from function signature]\n**Returns**: [Actual return type/structure]\n**Example**:\n```\n[Real usage example from code or tests]\n```"
                 },
                 {
                     "name": "Advanced Topics",
-                    "content": "## Performance Optimization\n- [Tip 1]: [Explanation]\n- [Tip 2]: [Explanation]\n\n## Security Considerations\n- **Authentication**: [How it works]\n- **Authorization**: [Permission model]\n- **Data Protection**: [Encryption/privacy]\n\n## Scaling Strategies\n- **Horizontal**: [How to scale out]\n- **Vertical**: [How to scale up]\n- **Monitoring**: [What to watch]"
+                    "content": "## Performance Optimization\n[Only document if performance features exist in code]\n\n## Security Considerations\n[Document only implemented security features]\n- **Authentication**: [If implemented, describe actual mechanism]\n- **Authorization**: [If implemented, describe actual implementation]\n\n## Scaling Strategies\n[Only document if scaling features are implemented]"
                 },
                 {
                     "name": "Troubleshooting & Diagnostics",
-                    "content": "## Common Issues\n\n### Issue: [Problem Description]\n**Symptoms**: [What you see]\n**Cause**: [Why it happens]\n**Solution**: [How to fix]\n**Prevention**: [How to avoid]\n\n## Debugging Tools\n- **Logs**: `[log location]`\n- **Metrics**: `[monitoring dashboard]`\n- **Health Check**: `[endpoint/command]`\n\n## Emergency Procedures\n1. [Immediate action]\n2. [Escalation path]\n3. [Recovery steps]"
+                    "content": "## Common Issues\n\n[Document only known issues from code, error handling, or issue tracker]\n\n### Issue: [Actual problem]\n**Symptoms**: [Real symptoms]\n**Cause**: [From code analysis]\n**Solution**: [Actual solution]\n\n## Debugging Tools\n[Only list tools/features that actually exist]\n- **Logs**: [Actual log location if logging is implemented]\n- **Health Check**: [Actual endpoint/command if it exists]"
                 },
                 {
                     "name": "Integration & Dependencies",
-                    "content": "## External Systems\n| System | Purpose | Contact | SLA |\n|--------|---------|---------|-----|\n| [Name] | [Function] | [Owner] | [Uptime] |\n\n## Upstream Dependencies\n- [Service 1]: [What we need from it]\n- [Service 2]: [What we need from it]\n\n## Downstream Consumers\n- [Service A]: [What they get from us]\n- [Service B]: [What they get from us]"
+                    "content": "## External Systems\n[Only list if external integrations exist in code]\n\n## Dependencies\n[List actual dependencies from package files]\n- [Actual package]: [Why it's used - from code analysis]\n\n## Consumers\n[Only document if there are known consumers]"
                 },
                 {
                     "name": "Operations & Maintenance",
-                    "content": "## Deployment Process\n1. [Pre-deployment checks]\n2. [Deployment steps]\n3. [Post-deployment verification]\n\n## Monitoring & Alerts\n- **Key Metrics**: [What to track]\n- **Alert Thresholds**: [When to notify]\n- **Runbooks**: [Response procedures]\n\n## Backup & Recovery\n- **Backup Schedule**: [When/how]\n- **Recovery Time**: [RTO/RPO]\n- **Test Procedures**: [Validation steps]"
+                    "content": "## Deployment Process\n[Document actual deployment process from CI/CD files or deployment scripts]\n\n## Monitoring & Alerts\n[Only document if monitoring is implemented]\n\n## Backup & Recovery\n[Only document if backup mechanisms exist]"
                 },
                 {
                     "name": "Knowledge Base",
-                    "content": "## Decision Log\n| Date | Decision | Rationale | Impact |\n|------|----------|-----------|--------|\n| [YYYY-MM-DD] | [What was decided] | [Why] | [Effect] |\n\n## Lessons Learned\n- **What worked**: [Success factors]\n- **What didn't**: [Failure points]\n- **Next time**: [Improvements]\n\n## Related Documentation\n- [Internal Doc 1]: [Link/location]\n- [External Resource]: [URL]\n- [Team Wiki]: [Link]"
+                    "content": "## Decision Log\n[Document decisions from commit history, PR discussions, or ADR files if they exist]\n\n## Related Documentation\n[Link only to documentation that actually exists in the project]"
                 },
                 {
                     "name": "Appendices",
-                    "content": "## Glossary\n- **[Term 1]**: [Definition]\n- **[Term 2]**: [Definition]\n\n## Change History\n| Version | Date | Author | Changes |\n|---------|------|--------|---------|\n| 1.0 | [Date] | [Name] | Initial version |\n\n## Contact Information\n- **Owner**: [Name/team]\n- **SME**: [Subject matter expert]\n- **Support**: [How to get help]"
+                    "content": "## Glossary\n[Define only terms actually used in the codebase]\n\n## Change History\n[Use actual version history from git tags or CHANGELOG if it exists]\n\n## Contact Information\n[Only include if documented in README or project files]"
                 }
             ],
             "folder_structure": {

@@ -7,9 +7,9 @@ The Playbook MCP Server is an AI-powered Model Context Protocol (MCP) server tha
 ### Key Features
 - **MCP Protocol Compliance**: Full Model Context Protocol implementation
 - **AI-Powered Documentation**: Repository-aware content generation inspired by DeepWiki
-- **Atlassian Integration**: Native Jira and Confluence integration
+- **Atlassian Integration**: Native Jira and Confluence integration through official MCP
 - **Extensible Playbooks**: Structured templates for common development tasks
-- **Production Ready**: Docker support, health monitoring, and scalable architecture
+- **Production Ready**: Not ready for production. Basic Docker support and health monitoring.
 
 ### Quick Navigation
 - [Getting Started](./guides/quick-start.md) - 5-minute setup guide
@@ -20,8 +20,8 @@ The Playbook MCP Server is an AI-powered Model Context Protocol (MCP) server tha
 
 ## Project Status
 
-**Current Version**: 2.1  
-**Development Phase**: Phase 1 Complete (Epic N8N-7)  
+**Current Version**: 2.1.1  
+**Development Phase**: Phase 1 Complete
 **Production Ready**: ✅ Yes
 
 ### Completed Features
@@ -29,7 +29,7 @@ The Playbook MCP Server is an AI-powered Model Context Protocol (MCP) server tha
 - [x] Health check endpoints  
 - [x] Configuration management
 - [x] Docker containerization
-- [x] Comprehensive playbook system (6 playbooks)
+- [x] Comprehensive playbook system
 - [x] Product management playbooks with Atlassian integration
 - [x] Documentation templates including comprehensive wiki
 - [x] Feature planning tools

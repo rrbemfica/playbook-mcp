@@ -141,4 +141,4 @@ Complete documentation index for the MCP Playbook Server.
 
 ---
 
-*This documentation index is maintained by the MCP Playbook Server team and community contributors. Last updated: January 2024*
+*This documentation index is maintained by the MCP Playbook Server team and community contributors. Last updated: October 2025*

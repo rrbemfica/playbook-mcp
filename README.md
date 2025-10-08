@@ -139,7 +139,7 @@ DEBUG=true
 
 ## 🏗️ Project Status
 
-**Current Version**: 2.1  
+**Current Version**: 2.1.1  
 **Development Phase**: Phase 1 Complete
 **Production Ready**: ✅ Yes
 
@@ -199,13 +199,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Cognition Labs DeepWiki**: Inspiration for AI-powered documentation features
 - **Model Context Protocol**: Foundation for AI assistant integration
 - **FastMCP Framework**: Core MCP server implementation
-
-## 📞 Support
-
-- **Documentation**: [Complete guides](./docs/README.md)
-- **Issues**: [GitHub Issues](https://github.com/your-repo/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-repo/discussions)
-- **Email**: ricardoregesb@gmail.com
 
 ---
 

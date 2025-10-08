@@ -555,7 +555,6 @@ Common issues and solutions.
 
 - **GitHub Issues**: Bug reports and feature requests
 - **GitHub Discussions**: Questions and community discussions
-- **Email**: Direct contact for sensitive issues
 
 ### Getting Help
 

@@ -4,7 +4,7 @@ Comprehensive guide to using and customizing playbooks in the MCP Playbook Serve
 
 ## Overview
 
-Playbooks are structured templates that provide consistent approaches to common development tasks. The server includes both traditional templates and AI-powered playbooks inspired by DeepWiki's repository analysis capabilities.
+Playbooks are structured templates that provide consistent approaches to common development tasks. The server includes 6 playbooks covering product management, documentation, and code review workflows.
 
 ## Available Playbooks
 
@@ -117,6 +117,8 @@ Standard comprehensive documentation template for general use.
 
 Multi-layered documentation template with 12 contextual sections for deep knowledge capture.
 
+**CRITICAL**: This playbook includes strict instructions to document ONLY what exists in the codebase. It forbids inventing features or documenting planned functionality.
+
 **Template Structure:**
 
 1. **Executive Summary**: What, why, and key outcomes
@@ -169,137 +171,46 @@ docs/
 - Keep file names lowercase with hyphens (kebab-case.md)
 - Maintain consistency across all documentation files
 
-## Playbook Usage Patterns
+### Additional Playbooks
 
-### Basic Usage
+#### Code Review
+**ID**: `code_review`  
+**Category**: Development
 
-```python
-from mcp_client import MCPClient
+Senior code reviewer template ensuring high standards of code quality and security.
 
-# Initialize client
-client = MCPClient("http://localhost:8000")
+**Template Structure:**
+- Instructions for reviewing code changes
+- Quality checklist (readability, naming, duplication, error handling)
+- Security checklist (secrets, validation, test coverage)
+- Feedback structure (critical, warnings, suggestions)
+- Code Issues integration with displayFindings tool
 
-# List available playbooks
-playbooks = client.call_tool("list_playbooks", {})
-print(f"Available playbooks: {len(playbooks['playbooks'])}")
+#### Epic & Story Review Checklist
+**ID**: `epic_story_review`  
+**Category**: Product Management
 
-# Get specific playbook
-playbook = client.call_tool("get_playbook", {
-    "playbook_id": "comprehensive_wiki"
-})
+Comprehensive review template for epic and story summaries and descriptions.
 
-# Use playbook template
-template = playbook["template"]
-sections = template["sections"]
-```
+**Template Structure:**
+- Summary Quality Check
+- Description Completeness
+- Clarity & Communication
+- Acceptance Criteria Review
+- Technical Considerations
+- Review Recommendations
+- Atlassian integration for accessing and updating Jira issues
 
-### Advanced Integration
+## Usage with MCP Clients
 
-```python
-# Get comprehensive wiki playbook
-playbook = client.call_tool("get_playbook", {
-    "playbook_id": "comprehensive_wiki"
-})
+This server is designed to be used with MCP-compatible clients (Claude Desktop, IDEs with MCP support, etc.).
 
-# Access folder structure recommendations
-folder_structure = playbook["folder_structure"]
-print(f"Recommended layout: {folder_structure['recommended_layout']}")
+**Available Tools:**
+- `list_playbooks()` - List all available playbooks
+- `get_playbook(playbook_id)` - Retrieve specific playbook template
+- `plan_feature(feature_description, project_type, complexity)` - Generate implementation plans
 
-# Get usage instructions
-instructions = playbook["usage_instructions"]
-for instruction in instructions:
-    print(f"- {instruction}")
-```
-
-### Atlassian Integration
-
-```python
-# Epic creation with playbook
-def create_epic_with_playbook(project_key, epic_data):
-    # Get epic playbook
-    playbook = client.call_tool("get_playbook", {
-        "playbook_id": "product_owner_epic"
-    })
-    
-    # Validate project access
-    projects = get_visible_jira_projects(project_key)
-    if not projects:
-        raise ValueError(f"No access to project {project_key}")
-    
-    # Format epic description using template
-    description = format_epic_description(playbook["template"], epic_data)
-    
-    # Create epic in Jira
-    epic = create_jira_issue(
-        project_key=project_key,
-        issue_type="Epic",
-        summary=epic_data["title"],
-        description=description
-    )
-    
-    return epic
-```
-
-## Customization Guide
-
-### Creating Custom Playbooks
-
-1. **Define Structure**
-```python
-custom_playbook = {
-    "name": "API Documentation Generator",
-    "description": "Generate API documentation from OpenAPI specs",
-    "category": "Documentation",
-    "template": {
-        "title": "[API Name] Documentation",
-        "sections": [
-            {
-                "name": "API Overview",
-                "content": "## Overview\n[Generated from OpenAPI specification]"
-            },
-            {
-                "name": "Endpoints",
-                "content": "## Endpoints\n[Auto-generated endpoint documentation]"
-            },
-            {
-                "name": "Authentication",
-                "content": "## Authentication\n[Security scheme documentation]"
-            }
-        ]
-    },
-    "metadata": {
-        "version": "1.0",
-        "author": "Development Team",
-        "tags": ["api", "documentation", "openapi"]
-    }
-}
-```
-
-2. **Add Processing Logic**
-```python
-def process_api_playbook(openapi_spec):
-    """Process OpenAPI specification to generate documentation."""
-    sections = []
-    
-    # Generate overview from spec info
-    overview = generate_api_overview(openapi_spec.get("info", {}))
-    sections.append({"name": "Overview", "content": overview})
-    
-    # Generate endpoint documentation
-    endpoints = generate_endpoint_docs(openapi_spec.get("paths", {}))
-    sections.append({"name": "Endpoints", "content": endpoints})
-    
-    # Generate authentication docs
-    auth = generate_auth_docs(openapi_spec.get("components", {}).get("securitySchemes", {}))
-    sections.append({"name": "Authentication", "content": auth})
-    
-    return sections
-```
-
-3. **Register Playbook**
-```python
-# Add to PLAYBOOKS registry
-PLAYBOOKS["api_documentation"] = custom_playbook
+**Note**: The playbooks provide templates and instructions. Actual Jira/Confluence integration requires using separate Atlassian MCP tools as instructed in the playbook templates.ocumentation"] = custom_playbook
 
 # Register processing function
 PLAYBOOK_PROCESSORS["api_documentation"] = process_api_playbook

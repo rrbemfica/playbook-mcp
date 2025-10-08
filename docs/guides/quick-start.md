@@ -44,49 +44,59 @@ Server starts at `http://localhost:8000`
 
 ## Verify Installation
 
-### Health Check
+The server runs on HTTP transport using the MCP protocol. It's designed to be used with MCP-compatible clients (Claude Desktop, IDEs with MCP support, etc.), not direct HTTP/cURL access.
+
+### Check Server is Running
 ```bash
-curl http://localhost:8000/health
+# Server should display startup message
+# MCP Playbook Server running on http://0.0.0.0:8000
 ```
 
-Expected response:
+## Using with MCP Clients
+
+### Configure MCP Client
+
+#### Option 1: Streamable (HTTP) Connection
+
+First, start the server:
+```bash
+python -m src.server
+```
+
+Then add to your MCP client configuration (e.g., Claude Desktop config):
+
 ```json
 {
-  "status": "healthy",
-  "timestamp": "2024-01-01T12:00:00Z"
+  "mcpServers": {
+    "playbook-server": {
+      "url": "http://localhost:8000/mcp"
+    }
+  }
 }
 ```
 
-### List Available Tools
-```bash
-curl -X POST http://localhost:8000/tools/list_playbooks \
-  -H "Content-Type: application/json" \
-  -d '{}'
+#### Option 2: Command-based Connection
+
+Add to your MCP client configuration:
+
+```json
+{
+  "mcpServers": {
+    "playbook-server": {
+      "command": "python",
+      "args": ["-m", "src.server"],
+      "cwd": "/path/to/mcp-playbook-server"
+    }
+  }
+}
 ```
 
-## First Steps
+### Available Tools
 
-### 1. Explore Playbooks
-```bash
-# List all playbooks
-curl -X POST http://localhost:8000/tools/list_playbooks -H "Content-Type: application/json" -d '{}'
-
-# Get specific playbook
-curl -X POST http://localhost:8000/tools/get_playbook \
-  -H "Content-Type: application/json" \
-  -d '{"playbook_id": "comprehensive_wiki"}'
-```
-
-### 2. Generate Feature Plan
-```bash
-curl -X POST http://localhost:8000/tools/plan_feature \
-  -H "Content-Type: application/json" \
-  -d '{
-    "feature_description": "User authentication system",
-    "project_type": "web",
-    "complexity": "medium"
-  }'
-```
+Once connected via MCP client:
+- `list_playbooks()` - List all 6 available playbooks
+- `get_playbook(playbook_id)` - Get specific playbook template
+- `plan_feature(feature_description, project_type, complexity)` - Generate implementation plan
 
 
 
@@ -103,8 +113,17 @@ docker run -p 8000:8000 mcp-playbook-server
 
 ### Docker Compose
 ```bash
-# Create docker-compose.yml (see deployment guide)
+# Navigate to docker folder
+cd docker
+
+# Start with docker-compose
 docker-compose up -d
+
+# Check status
+docker-compose ps
+
+# View logs
+docker-compose logs -f mcp-server
 ```
 
 ## Configuration Options
@@ -121,10 +140,9 @@ DEBUG=true
 ### Available Settings
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `SERVER_NAME` | "MCP Playbook Server" | Server identification |
+| `SERVER_NAME` | "Playbook MCP Server" | Server identification |
 | `PORT` | 8000 | HTTP server port |
 | `ENVIRONMENT` | "development" | Runtime environment |
-| `DEBUG` | false | Debug mode toggle |
 
 ## Troubleshooting
 
@@ -158,26 +176,10 @@ chmod +x src/server.py
 
 ## Development Mode
 
-### Enable Debug Logging
+### Run in Development
 ```bash
-# In .env file
-DEBUG=true
+# Set environment to development
+ENVIRONMENT=development python -m src.server
 ```
 
-### Hot Reload (Development)
-```bash
-# Install development dependencies
-pip install watchdog
-
-# Run with auto-reload
-python -m src.server --reload
-```
-
-### Testing
-```bash
-# Run tests
-python -m pytest tests/ -v
-
-# Run with coverage
-python -m pytest tests/ --cov=src
-```
+**Note**: Hot reload and testing features are not currently implemented. The server provides a simple MCP interface for playbook templates.

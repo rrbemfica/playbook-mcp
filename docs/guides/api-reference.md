@@ -9,31 +9,9 @@ Complete API documentation for the MCP Playbook Server.
 - **Format**: JSON
 - **Authentication**: None required
 
-## Health Endpoints
+## MCP Protocol
 
-### GET /health
-Basic health check endpoint.
-
-**Response:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2024-01-01T12:00:00Z"
-}
-```
-
-### GET /info
-Server information and capabilities.
-
-**Response:**
-```json
-{
-  "name": "MCP Playbook Server",
-  "version": "2.1",
-  "description": "Enhanced MCP Playbook Server with AI documentation",
-  "tools": ["list_playbooks", "get_playbook", "plan_feature"]
-}
-```
+This server implements the Model Context Protocol (MCP). It does not expose traditional REST endpoints like `/health` or `/info`. Instead, it uses MCP tools accessed through MCP clients.
 
 ## MCP Tools
 
@@ -154,30 +132,46 @@ Generate a comprehensive feature implementation plan.
         "Define functional requirements",
         "Identify non-functional requirements",
         "Map dependencies"
-      ],
-      "deliverables": ["Requirements document", "Dependency map"],
-      "estimated_effort": "2-3 days"
+      ]
     },
     {
-      "phase": "Design",
+      "phase": "Technical Design",
       "tasks": [
-        "Create system architecture",
-        "Design database schema",
-        "Define API contracts"
-      ],
-      "deliverables": ["Architecture diagram", "Database schema", "API specification"],
-      "estimated_effort": "3-5 days"
+        "Architecture planning",
+        "Database schema (if needed)",
+        "API design (if applicable)"
+      ]
+    },
+    {
+      "phase": "Development",
+      "tasks": [
+        "Set up development environment",
+        "Implement core functionality",
+        "Add error handling"
+      ]
+    },
+    {
+      "phase": "Testing",
+      "tasks": [
+        "Unit tests",
+        "Integration tests",
+        "User acceptance testing"
+      ]
+    },
+    {
+      "phase": "Deployment",
+      "tasks": [
+        "Staging deployment",
+        "Production deployment",
+        "Monitoring setup"
+      ]
     }
   ],
-  "technical_considerations": [
-    "Security: Implement proper password hashing",
-    "Performance: Consider session management strategy",
-    "Scalability: Design for horizontal scaling"
-  ],
   "next_actions": [
-    "Create Jira epic with this plan",
-    "Estimate detailed effort and timeline",
-    "Identify team members and skills needed"
+    "Create Jira ticket with this plan",
+    "Estimate effort and timeline",
+    "Assign team members",
+    "Begin requirements gathering"
   ]
 }
 ```
@@ -214,27 +208,13 @@ Generate a comprehensive feature implementation plan.
 | 404 | Not Found | Tool or playbook not found |
 | 500 | Internal Server Error | Server-side error during execution |
 
-## Rate Limiting
+## Server Configuration
 
-Currently no rate limiting is implemented. For production use, consider implementing:
-- Request rate limits per IP
-- Tool-specific rate limits
-- Burst protection
-
-## CORS Policy
-
-CORS is enabled for all origins in development mode. For production:
-```python
-# Configure CORS appropriately
-CORS_ORIGINS = ["https://yourdomain.com"]
-```
-
-## Authentication
-
-No authentication is currently required, following the DeepWiki approach for development tools. For production use, consider:
-- API key authentication
-- JWT token validation
-- OAuth integration
+The server runs on HTTP transport with configurable settings:
+- **Host**: 0.0.0.0
+- **Port**: 8000 (configurable via environment)
+- **Transport**: HTTP
+- **Protocol**: MCP (Model Context Protocol)
 
 ## Examples
 
@@ -280,29 +260,8 @@ const playbookResponse = await fetch('http://localhost:8000/tools/get_playbook',
 const playbook = await playbookResponse.json();
 ```
 
-### cURL Examples
-```bash
-# Health check
-curl http://localhost:8000/health
+### MCP Client Usage
 
-# List playbooks
-curl -X POST http://localhost:8000/tools/list_playbooks \
-  -H "Content-Type: application/json" \
-  -d '{}'
+This server is designed to be used with MCP-compatible clients (like Claude Desktop, IDEs with MCP support, etc.). Direct HTTP/cURL access is not the intended usage pattern.
 
-# Generate feature plan
-curl -X POST http://localhost:8000/tools/plan_feature \
-  -H "Content-Type: application/json" \
-  -d '{"feature_description": "User authentication", "project_type": "web"}' 
-```
-
-## OpenAPI Specification
-
-The server provides an OpenAPI specification at `/openapi.json` for automatic client generation and API documentation tools.
-
-## WebSocket Support
-
-Currently not implemented. Future versions may include WebSocket support for:
-- Real-time tool execution updates
-- Streaming responses for large content generation
-- Live collaboration features
+For testing purposes, you can use MCP client libraries or tools that support the MCP protocol.

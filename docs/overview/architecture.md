@@ -1,248 +1,165 @@
 # Architecture Overview
 
-Comprehensive system architecture documentation for the MCP Playbook Server.
+Simple architecture documentation for the MCP Playbook Server.
 
 ## System Overview
 
-The MCP Playbook Server is built on a modular, scalable architecture that combines the Model Context Protocol (MCP) standard with AI-powered content generation capabilities, inspired by Cognition Labs' DeepWiki approach.
+The MCP Playbook Server is a lightweight MCP server built with FastMCP that provides curated playbook templates for product management, documentation, and code review workflows.
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    MCP Playbook Server                         │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │   MCP Client    │  │   HTTP Client   │  │   AI Assistant  │ │
-│  │   Integration   │  │   Integration   │  │   Integration   │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-├─────────────────────────────────────────────────────────────────┤
-│                    FastMCP Framework                           │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │  Tool Registry  │  │ Playbook Engine │  │  AI Integration │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │  Configuration  │  │    Templates    │  │   Validation    │ │
-│  │    Manager      │  │     Engine      │  │     Layer       │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│        MCP Playbook Server             │
+├─────────────────────────────────────────┤
+│  ┌──────────────────────────────────┐  │
+│  │      FastMCP Framework           │  │
+│  │  (HTTP Server + MCP Protocol)    │  │
+│  └──────────────────────────────────┘  │
+├─────────────────────────────────────────┤
+│  ┌──────────────────────────────────┐  │
+│  │         MCP Tools                │  │
+│  │  • list_playbooks()              │  │
+│  │  • get_playbook(id)              │  │
+│  │  • plan_feature(...)             │  │
+│  └──────────────────────────────────┘  │
+├─────────────────────────────────────────┤
+│  ┌──────────────────────────────────┐  │
+│  │    Playbook Registry             │  │
+│  │  (In-memory dictionary)          │  │
+│  └──────────────────────────────────┘  │
+├─────────────────────────────────────────┤
+│  ┌──────────────────────────────────┐  │
+│  │    Configuration                 │  │
+│  │  (Pydantic Settings)             │  │
+│  └──────────────────────────────────┘  │
+└─────────────────────────────────────────┘
 ```
 
 ## Core Components
 
-### 1. FastMCP Framework Layer
+### 1. FastMCP Framework
 
-**Purpose**: Foundation for MCP protocol implementation and HTTP server management
-
-**Responsibilities**:
-- HTTP server lifecycle management
-- MCP protocol compliance and validation
-- Tool registration and discovery
-- Request routing and response handling
-- Error management and recovery
-- Health monitoring and metrics
-
-**Key Features**:
-- Automatic tool registration via Python decorators
-- JSON schema validation for all inputs/outputs
-- Asynchronous operation support for scalability
-- Built-in health checks and monitoring endpoints
-- Graceful shutdown and resource cleanup
+**Purpose**: Provides MCP protocol implementation and HTTP server
 
 **Implementation**:
 ```python
 from fastmcp import FastMCP
 
-mcp = FastMCP("MCP Playbook Server")
+mcp = FastMCP("Playbook MCP Server")
 
 @mcp.tool()
-def plan_feature(feature_description: str) -> Dict[str, Any]:
+def list_playbooks() -> Dict[str, Any]:
     """Tool implementation with automatic registration"""
-    return generate_feature_plan(feature_description)
+    return {"playbooks": [...], "total_playbooks": 6}
 ```
 
-### 2. Tool Registry
+**Features**:
+- Automatic tool registration via decorators
+- JSON schema validation
+- HTTP transport on port 8000
 
-**Purpose**: Central registry for all available tools and their metadata
-
-**Architecture**:
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Tool Registry                           │
-├─────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐ │
-│  │   Discovery     │  │   Validation    │  │   Metadata  │ │
-│  │   Engine        │  │   Engine        │  │   Manager   │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────┘ │
-├─────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐ │
-│  │   Parameter     │  │   Response      │  │   Error     │ │
-│  │   Processing    │  │   Formatting    │  │   Handling  │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────┘ │
-└─────────────────────────────────────────────────────────────┘
-```
+### 2. MCP Tools
 
 **Available Tools**:
+
+1. **list_playbooks()** - Returns all available playbooks with metadata
+2. **get_playbook(playbook_id)** - Retrieves specific playbook template
+3. **plan_feature(feature_description, project_type, complexity)** - Generates implementation plans
+
+### 3. Playbook Registry
+
+**Purpose**: In-memory storage of playbook templates
+
+**Structure**:
 ```python
-TOOLS = {
-    "list_playbooks": {
-        "function": list_playbooks,
-        "description": "List all available playbooks",
-        "parameters": {},
-        "category": "Core"
-    },
-    "get_playbook": {
-        "function": get_playbook,
-        "description": "Retrieve specific playbook template",
-        "parameters": {"playbook_id": str},
-        "category": "Core"
-    },
-    "plan_feature": {
-        "function": plan_feature,
-        "description": "Generate feature implementation plans",
-        "parameters": {
-            "feature_description": str,
-            "project_type": str,
-            "complexity": str
-        },
-        "category": "Planning"
-    },
-
-}
-```
-
-### 3. Playbook Engine
-
-**Purpose**: Core playbook management, processing, and content generation
-
-**Detailed Architecture**:
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Playbook Engine                         │
-├─────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐ │
-│  │    Registry     │  │   Template      │  │   Content   │ │
-│  │    Manager      │  │   Processor     │  │  Generator  │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────┘ │
-├─────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐ │
-│  │   Validation    │  │   AI Content    │  │   Output    │ │
-│  │     Engine      │  │   Generation    │  │  Formatter  │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────┘ │
-└─────────────────────────────────────────────────────────────┘
-```
-
-**Playbook Categories and Structure**:
-
-1. **Product Management Playbooks**
-   - Epic writing templates with Atlassian integration
-   - User story templates with acceptance criteria
-   - Requirements gathering frameworks
-   - Stakeholder communication templates
-
-2. **Documentation Playbooks**
-   - Traditional comprehensive documentation templates
-   - AI-powered repository-aware documentation
-   - API documentation generators
-   - Troubleshooting guides
-
-3. **Development Playbooks**
-   - Feature planning and implementation guides
-   - Code review checklists by language and type
-   - Testing strategy templates
-   - Deployment runbooks
-
-**Playbook Data Structure**:
-```python
-PLAYBOOK_SCHEMA = {
-    "id": str,                    # Unique identifier
-    "name": str,                  # Human-readable name
-    "description": str,           # Purpose and usage
-    "category": str,              # Organizational category
-    "version": str,               # Version for tracking changes
-    "template": {                 # Template structure
-        "title": str,             # Document title template
-        "sections": [             # Ordered sections
-            {
-                "name": str,      # Section name
-                "content": str,   # Template content with placeholders
-                "ai_enhanced": bool,  # Whether AI generation is available
-                "required": bool  # Whether section is mandatory
-            }
-        ]
-    },
-    "metadata": {                 # Additional metadata
-        "author": str,
-        "created": datetime,
-        "updated": datetime,
-        "tags": List[str],
-        "usage_count": int
+PLAYBOOKS = {
+    "playbook_id": {
+        "name": str,
+        "description": str,
+        "category": str,
+        "template": {
+            "title": str,
+            "sections": [...]
+        }
     }
 }
 ```
 
-### 4. AI Integration Layer
+**Available Playbooks**:
 
-**Purpose**: Provides AI-powered content generation capabilities inspired by DeepWiki
+1. **Product Management**
+   - `product_owner_epic` - Epic writing with Atlassian integration
+   - `product_owner_story` - User story templates
+   - `epic_story_review` - Review checklist for epics/stories
 
-**AI Workflow Architecture**:
-```
-Repository → Analysis → Context → Generation → Validation → Output
-     ↓           ↓         ↓          ↓           ↓         ↓
-   Code       Structure  Patterns   Content    Quality   Documentation
-  Analysis    Detection  Recognition Generation Assurance
-```
+2. **Documentation**
+   - `documentation` - Basic documentation template
+   - `comprehensive_wiki` - Multi-layered wiki structure
 
-**Components**:
+3. **Development**
+   - `code_review` - Code review checklist
 
-1. **Repository Analyzer**
+### 4. Configuration
+
+**Purpose**: Environment-based settings management
+
+**Implementation**:
 ```python
-class RepositoryAnalyzer:
-    def analyze_structure(self, repo_path: str) -> Dict[str, Any]:
-        """Analyze repository structure and patterns"""
-        return {
-            "file_structure": self._analyze_files(repo_path),
-            "dependencies": self._extract_dependencies(repo_path),
-            "patterns": self._identify_patterns(repo_path),
-            "documentation": self._find_existing_docs(repo_path),
-            "configuration": self._analyze_config(repo_path)
-        }
+class Settings(BaseSettings):
+    server_name: str = "Playbook MCP Server"
+    port: int = 8000
+    environment: str = "development"
 ```
 
-2. **Content Generator**
-```python
-class AIContentGenerator:
-    def generate_section_content(self, 
-                               section_type: str, 
-                               analysis: Dict[str, Any]) -> str:
-        """Generate content based on repository analysis"""
-        generators = {
-            "overview": self._generate_overview,
-            "quick_start": self._generate_quick_start,
-            "architecture": self._generate_architecture,
-            "troubleshooting": self._generate_troubleshooting
-        }
-        return generators[section_type](analysis)
+**Configuration Source**: `.env` file or environment variables
+
+## Data Flow
+
+```
+MCP Client Request
+       ↓
+FastMCP HTTP Server
+       ↓
+Tool Execution (list_playbooks/get_playbook/plan_feature)
+       ↓
+Playbook Registry Lookup
+       ↓
+JSON Response
+       ↓
+MCP Client
 ```
 
-3. **Quality Assurance Engine**
-```python
-class QualityAssurance:
-    def validate_content(self, 
-                        content: str, 
-                        analysis: Dict[str, Any]) -> Dict[str, Any]:
-        """Validate AI-generated content for accuracy"""
-        return {
-            "accuracy_score": self._check_accuracy(content, analysis),
-            "completeness_score": self._check_completeness(content),
-            "clarity_score": self._check_readability(content),
-            "suggestions": self._generate_improvements(content)
-        }
+## Integration Points
+
+**Atlassian Integration**:
+- Playbooks include instructions for using Atlassian MCP tools
+- Integration guidance for Jira issue creation/editing
+- No direct Atlassian API calls in this server
+
+**Code Issues Integration**:
+- Code review playbook includes displayFindings tool instructions
+- No direct implementation of code analysis
+
+## File Structure
+
+```
+mcp-playbook-server/
+├── src/
+│   ├── server.py          # Main server + tools + playbooks
+│   ├── config.py          # Configuration settings
+│   └── __init__.py
+├── docs/                  # Documentation
+├── docker/                # Docker configuration
+├── pyproject.toml         # Dependencies
+└── README.md
 ```
 
-### 5. Configuration Manager
+## Technology Stack
 
-**Purpose**: Centralized configuration and environment management
+- **Framework**: FastMCP
+- **Language**: Python 3.x
+- **Configuration**: Pydantic Settings
+- **Transport**: HTTP
+- **Protocol**: Model Context Protocol (MCP)ntralized configuration and environment management
 
 **Configuration Hierarchy**:
 ```
